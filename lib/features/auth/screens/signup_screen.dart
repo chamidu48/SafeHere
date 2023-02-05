@@ -1,12 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../colors.dart';
-import '../../../text_styles.dart';
+import '../../../global_styles.dart';
 import '../../../widgets/custom_button.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _nameFieldController=TextEditingController();
+  final _emailFieldController=TextEditingController();
+  final _numberController=TextEditingController();
+  final _ccodeController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,101 +30,47 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: (){},
-                          color: Colors.white,
-                          icon: Icon(Icons.arrow_back_ios)
-                      )
-                    ],
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: (){},
+                            color: Colors.white,
+                            icon: Icon(Icons.arrow_back_ios)
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: 80,),
+                          SizedBox(height: 30,),
                           SvgPicture.asset('assets/svg/logo_small.svg'),
-                          Text('Log In',style: heading,),
-                          Text('Please enter your mobile number',style: subtitle1,),
-                          SizedBox(height: 40,),
+                          Text('Sign In',style: heading,),
+                          Text('Enter your details to register',style: subtitle1,),
+                          SizedBox(height: 30,),
+                          buildNameField(),
+                          SizedBox(height: 10,),
+                          buildEmailField(),
+                          SizedBox(height: 10,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 0, horizontal: 20),
-                                height: 60,
-                                width: 70,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: myColorScheme[400],
-                                    border: Border.all(
-                                        color: primaryColor,
-                                        width: 2
-                                    ),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Center(
-                                  child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.transparent,
-                                      label: Text('+1'),
-                                      labelStyle: textfield,
-                                      enabledBorder: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                      floatingLabelAlignment:
-                                      FloatingLabelAlignment.center,
-                                    ),
-                                  ),
-                                ),
+                              Expanded(
+                                flex: 1,
+                                child: buildCCode(),
                               ),
                               SizedBox(width: 8,),
                               Expanded(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 0, horizontal: 20),
-                                    height: 60,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                        color: myColorScheme[400],
-                                        border: Border.all(
-                                            color: primaryColor,
-                                            width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(15)),
-                                    child: TextField(
-                                      keyboardType: TextInputType.number,
-                                      textAlign: TextAlign.center,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.transparent,
-                                        label: Text('Enter mobile number'),
-                                        labelStyle: textfield,
-                                        enabledBorder: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        focusedErrorBorder: InputBorder.none,
-                                        floatingLabelAlignment:
-                                        FloatingLabelAlignment.center,
-                                      ),
-                                    ),
-                                  )
+                                  flex: 4,
+                                  child: buildNumber()
                               ),
                             ],
                           ),
@@ -121,20 +78,20 @@ class SignUpScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Have trouble with login?',style: subtitle1,),
+                              Text('Already have an account?',style: subtitle1,),
                               TextButton(
                                 onPressed: (){},
-                                child: Text('Click here',style: textbutton,),
+                                child: Text('Login',style: textbutton,),
                               )
                             ],
                           ),
                           SizedBox(height: 40,),
-                          CustomButton(text: 'Login', onPressed: (){},color: Colors.white,isfilled: true,),
+                          CustomButton(text: 'Continue', onPressed: (){print(_numberController.text);},color: Colors.white,isfilled: true,),
                         ],
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           )
@@ -142,4 +99,107 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
+  Widget buildNameField()=>TextField(
+    controller: _nameFieldController,
+    keyboardType: TextInputType.text,
+    textInputAction: TextInputAction.done,
+    decoration: InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 1)
+      ),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 2)
+      ),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.red,width: 2)
+      ),
+      hintText: 'Enter your name',
+      hintStyle: textfield,
+      filled: true,
+      fillColor: myColorScheme[400],
+    ),
+    textAlign: TextAlign.start,
+  );
+
+  Widget buildEmailField()=>TextField(
+    controller: _emailFieldController,
+    keyboardType: TextInputType.emailAddress,
+    textInputAction: TextInputAction.done,
+    decoration: InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 1)
+      ),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 2)
+      ),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.red,width: 2)
+      ),
+      hintText: 'Enter your email',
+      hintStyle: textfield,
+      filled: true,
+      fillColor: myColorScheme[400],
+    ),
+    textAlign: TextAlign.start,
+  );
+
+  Widget buildNumber()=>TextField(
+    controller: _numberController,
+    keyboardType: TextInputType.number,
+    textInputAction: TextInputAction.done,
+    decoration: InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 1)
+      ),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 2)
+      ),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.red,width: 2)
+      ),
+      hintText: 'Enter mobile number',
+      hintStyle: textfield,
+      filled: true,
+      fillColor: myColorScheme[400],
+    ),
+    textAlign: TextAlign.start,
+  );
+
+  Widget buildCCode()=>TextField(
+    controller: _ccodeController,
+    enabled: false,
+    decoration: InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 1)
+      ),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 2)
+      ),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.red,width: 2)
+      ),
+      disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 1)
+      ),
+      hintText: '+94',
+      hintStyle: textfield,
+      filled: true,
+      fillColor: myColorScheme[400],
+    ),
+    textAlign: TextAlign.center,
+  );
 }
+

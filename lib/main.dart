@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:safehere/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
+import 'package:safehere/features/auth/screens/otpverify_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
 import 'package:safehere/widgets/custom_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'features/auth/screens/signup_screen.dart';
 
 void main()=>runApp(MyApp());
 
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
         accentColor: myColorScheme[400],
       ),
       //home: SplashScreen()
-      home: LoginScreen(),
+      home: OTPscreen(),
     );
   }
 }

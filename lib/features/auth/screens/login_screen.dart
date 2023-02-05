@@ -1,17 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:safehere/text_styles.dart';
+import 'package:safehere/global_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../colors.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/text_fields.dart';
-class LoginScreen extends StatelessWidget {
+
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _numberController=TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    final height=MediaQuery.of(context).size.height;
+    final width=MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -21,24 +32,24 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: (){},
-                          color: Colors.white,
-                          icon: Icon(Icons.arrow_back_ios)
-                      )
-                    ],
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: (){},
+                            color: Colors.white,
+                            icon: Icon(Icons.arrow_back_ios)
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -50,72 +61,14 @@ class LoginScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 0, horizontal: 20),
-                                height: 60,
-                                width: 70,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: myColorScheme[400],
-                                    border: Border.all(
-                                      color: primaryColor,
-                                      width: 2
-                                    ),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Center(
-                                  child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.transparent,
-                                      label: Text('+1'),
-                                      labelStyle: textfield,
-                                      enabledBorder: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                      floatingLabelAlignment:
-                                          FloatingLabelAlignment.center,
-                                    ),
-                                  ),
-                                ),
+                              Expanded(
+                                flex: 1,
+                                child: buildCCode(),
                               ),
                               SizedBox(width: 8,),
                               Expanded(
-                                  child: Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 0, horizontal: 20),
-                                height: 60,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    color: myColorScheme[400],
-                                    border: Border.all(
-                                      color: primaryColor,
-                                      width: 2
-                                    ),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.transparent,
-                                    label: Text('Enter mobile number'),
-                                    labelStyle: textfield,
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    disabledBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    focusedErrorBorder: InputBorder.none,
-                                    floatingLabelAlignment:
-                                        FloatingLabelAlignment.center,
-                                  ),
-                                ),
-                              )
+                                flex: 4,
+                                  child: buildNumber()
                               ),
                             ],
                           ),
@@ -125,18 +78,18 @@ class LoginScreen extends StatelessWidget {
                             children: [
                               Text('Have trouble with login?',style: subtitle1,),
                               TextButton(
-                                  onPressed: (){},
+                                onPressed: (){},
                                 child: Text('Click here',style: textbutton,),
-                                  )
+                              )
                             ],
                           ),
                           SizedBox(height: 40,),
                           CustomButton(text: 'Login', onPressed: (){},color: Colors.white,isfilled: true,),
                         ],
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           )
@@ -144,5 +97,56 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+  Widget buildNumber()=>TextField(
+    controller: _numberController,
+    keyboardType: TextInputType.number,
+    textInputAction: TextInputAction.done,
+    decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 1)
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 2)
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.red,width: 2)
+      ),
+        hintText: 'Enter mobile number',
+        hintStyle: textfield,
+        filled: true,
+        fillColor: myColorScheme[400],
+    ),
+    textAlign: TextAlign.start,
+  );
+
+  Widget buildCCode()=>TextField(
+    controller: _numberController,
+    keyboardType: TextInputType.number,
+    textInputAction: TextInputAction.done,
+    decoration: InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 1)
+      ),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white,width: 2)
+      ),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.red,width: 2)
+      ),
+      hintText: '+94',
+      hintStyle: textfield,
+      filled: true,
+      fillColor: myColorScheme[400],
+    ),
+    textAlign: TextAlign.center,
+  );
 }
+
+
 

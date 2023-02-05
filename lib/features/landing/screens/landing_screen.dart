@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:safehere/colors.dart';
-import 'package:safehere/text_styles.dart';
+import 'package:safehere/global_styles.dart';
 import 'package:safehere/widgets/custom_button.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class LandingScreen extends StatelessWidget {
           SafeArea(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -32,7 +32,7 @@ class LandingScreen extends StatelessWidget {
                     SizedBox(height: 20,),
                     CustomButton(text: 'Login', onPressed: (){},color: Colors.white,isfilled: true,),
                     SizedBox(height: 20,),
-                    CustomButton(text: 'Log In', onPressed: (){},color: Colors.white,isfilled: true,)
+                    CustomButton(text: 'Sign In', onPressed: (){},color: Colors.white,isfilled: false,)
                   ],
                 ),
               ),
