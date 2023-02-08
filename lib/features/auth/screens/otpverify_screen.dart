@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:safehere/widgets/buttons.dart';
 
 import '../../../colors.dart';
 import '../../../global_styles.dart';
@@ -12,6 +14,16 @@ import '../../../widgets/custom_button.dart';
  }
 
  class _OTPscreenState extends State<OTPscreen> {
+
+   final _pinCodeController=TextEditingController();
+
+   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _pinCodeController.dispose();
+  }
+
    @override
    Widget build(BuildContext context) {
      return Scaffold(
@@ -33,35 +45,56 @@ import '../../../widgets/custom_button.dart';
                      Row(
                        children: [
                          IconButton(
-                             onPressed: (){},
+                             onPressed: (){
+                               Navigator.popAndPushNamed(context, '/landing');
+                             },
                              color: Colors.white,
                              icon: Icon(Icons.arrow_back_ios)
                          )
                        ],
                      ),
                      Padding(
-                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
+                       padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 0),
                        child: Column(
                          mainAxisAlignment: MainAxisAlignment.start,
                          children: [
                            SizedBox(height: 80,),
                            SvgPicture.asset('assets/svg/logo_small.svg'),
                            Text('Verify number',style: heading,),
-                           Text('Please enter the 6 digit code you recieve',style: subtitle1,),
+                           Text('Please enter the 6 digit code you recieve',style: subtitle,),
                            SizedBox(height: 40,),
-                           SizedBox(height: 40,),
+                           PinCodeTextField(
+                             controller: _pinCodeController,
+                             keyboardType: TextInputType.number,
+                             defaultBorderColor: Colors.white,
+                             maxLength: 6,
+                             errorBorderColor: Colors.red,
+                             autofocus: false,
+                             hasUnderline: false,
+                             onDone: (pin){},
+                             pinTextStyle: textfield,
+                             pinBoxWidth: 45,
+                             hasTextBorderColor: Colors.white,
+                             pinBoxRadius: 10,
+                             pinBoxBorderWidth: 1,
+                             pinBoxColor: Colors.white.withOpacity(0.2),
+                             pinBoxHeight: 60,
+                           ),
+                           SizedBox(height: 30,),
                            Row(
                              mainAxisAlignment: MainAxisAlignment.center,
                              children: [
-                               Text('Didn\'t receive code?',style: subtitle1,),
+                               Text('Didn\'t receive code?',style: subtitle,),
                                TextButton(
                                  onPressed: (){},
                                  child: Text('Resend',style: textbutton,),
                                )
                              ],
                            ),
-                           SizedBox(height: 40,),
-                           CustomButton(text: 'Verify', onPressed: (){},color: Colors.white,isfilled: true,),
+                           SizedBox(height: 30,),
+                           filledButton((){
+                           Navigator.popAndPushNamed(context, '/getuserinfo');
+                           }, 'Verify', Colors.white, primaryColor)
                          ],
                        ),
                      )

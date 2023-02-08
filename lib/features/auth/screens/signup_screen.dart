@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:safehere/widgets/buttons.dart';
 
 import '../../../colors.dart';
 import '../../../global_styles.dart';
@@ -18,6 +19,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailFieldController=TextEditingController();
   final _numberController=TextEditingController();
   final _ccodeController=TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _nameFieldController.dispose();
+    _emailFieldController.dispose();
+    _numberController.dispose();
+    _ccodeController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +51,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.popAndPushNamed(context, '/landing');
+                            },
                             color: Colors.white,
                             icon: Icon(Icons.arrow_back_ios)
                         )
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(height: 30,),
                           SvgPicture.asset('assets/svg/logo_small.svg'),
                           Text('Sign In',style: heading,),
-                          Text('Enter your details to register',style: subtitle1,),
+                          Text('Enter your details to register',style: subtitle,),
                           SizedBox(height: 30,),
                           buildNameField(),
                           SizedBox(height: 10,),
@@ -78,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Already have an account?',style: subtitle1,),
+                              Text('Already have an account?',style: subtitle,),
                               TextButton(
                                 onPressed: (){},
                                 child: Text('Login',style: textbutton,),
@@ -86,7 +99,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ],
                           ),
                           SizedBox(height: 40,),
-                          CustomButton(text: 'Continue', onPressed: (){print(_numberController.text);},color: Colors.white,isfilled: true,),
+                          filledButton((){
+                            Navigator.popAndPushNamed(context, '/otp');
+                          }, 'Continue', Colors.white, primaryColor)
                         ],
                       ),
                     )

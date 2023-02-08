@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:safehere/global_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:safehere/widgets/buttons.dart';
 
+import 'package:country_picker/country_picker.dart';
 import '../../../colors.dart';
-import '../../../widgets/custom_button.dart';
-import '../../../widgets/text_fields.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,6 +17,25 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _numberController=TextEditingController();
+  final _ccodeController=TextEditingController();
+  String countrycode='+1';
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _numberController.dispose();
+  }
+
+  void countryPicker()=>showCountryPicker(
+    context: context,
+    showPhoneCode: true, // optional. Shows phone code before the country name.
+    onSelect: (Country _country) {
+      setState(() {
+        print(_country.countryCode);
+      });
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -42,28 +61,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.popAndPushNamed(context, '/landing');
+                            },
                             color: Colors.white,
                             icon: Icon(Icons.arrow_back_ios)
                         )
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(height: 80,),
                           SvgPicture.asset('assets/svg/logo_small.svg'),
                           Text('Log In',style: heading,),
-                          Text('Please enter your mobile number',style: subtitle1,),
+                          Text('Please enter your mobile number',style: subtitle,),
                           SizedBox(height: 40,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: buildCCode(),
+                                child: InkWell(
+                                    onTap:countryPicker,
+                                    child: buildCCode()
+                                ),
                               ),
                               SizedBox(width: 8,),
                               Expanded(
@@ -76,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Have trouble with login?',style: subtitle1,),
+                              Text('Have trouble with login?',style: subtitle,),
                               TextButton(
                                 onPressed: (){},
                                 child: Text('Click here',style: textbutton,),
@@ -84,7 +108,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           SizedBox(height: 40,),
-                          CustomButton(text: 'Login', onPressed: (){},color: Colors.white,isfilled: true,),
+                          filledButton((){
+                              Navigator.popAndPushNamed(context, '/otp');
+                          }, 'Login', Colors.white, primaryColor)
                         ],
                       ),
                     )
@@ -123,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
   );
 
   Widget buildCCode()=>TextField(
-    controller: _numberController,
+    controller: _ccodeController,
     keyboardType: TextInputType.number,
     textInputAction: TextInputAction.done,
     decoration: InputDecoration(
@@ -139,11 +165,16 @@ class _LoginScreenState extends State<LoginScreen> {
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(color: Colors.red,width: 2)
       ),
-      hintText: '+94',
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+      borderSide: BorderSide(color: Colors.white,width: 1)
+      ),
+      hintText: '+1',
       hintStyle: textfield,
       filled: true,
       fillColor: myColorScheme[400],
     ),
+    enabled: false,
     textAlign: TextAlign.center,
   );
 }

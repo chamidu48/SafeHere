@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 //--main colors--
 const primaryColor=Color(0xff24527A);
 const secondColor=Color(0xff4278A8);
+const appbarColor=Color(0xff24527A);
+const bodyColor=Color(0xff0C2F4E);
+const chatcardSelectedColor=Color(0xff4278A8);
 const backgroundGradient=LinearGradient(
   colors:[Color(0xff4278A8),Color(0xff083D6A)],
   begin: Alignment.topCenter,

@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:safehere/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
+import 'package:safehere/features/auth/screens/user_info_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
 import 'package:safehere/widgets/custom_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,8 +27,14 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: myColorScheme[700],
         accentColor: myColorScheme[400],
       ),
-      //home: SplashScreen()
-      home: OTPscreen(),
+      routes: <String,WidgetBuilder>{
+        '/':(context)=>SplashScreen(),
+        '/landing':(context)=>LandingScreen(),
+        '/login':(context)=>LoginScreen(),
+        '/signup':(context)=>SignUpScreen(),
+        '/otp':(context)=>OTPscreen(),
+        '/getuserinfo':(context)=>UserInfoSelectScreen()
+      },
     );
   }
 }
@@ -37,6 +47,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+      Duration(seconds: 5),
+        ()=>{
+        Navigator.popAndPushNamed(context, '/landing')
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
