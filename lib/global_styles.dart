@@ -23,6 +23,12 @@ final appbartext = GoogleFonts.poppins(
   fontWeight: FontWeight.w500
 );
 
+final appbartitle = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w500
+);
+
 final subtitlebold = GoogleFonts.poppins(
     color: primaryColor,
     fontSize: 15,
