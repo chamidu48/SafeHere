@@ -62,7 +62,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 50,),
+                  SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -71,8 +71,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
                           foregroundColor: Colors.white,
                           backgroundColor: myColorScheme[400],
                           child: Text('Chnage Photo'),
-                          minRadius: 65,
-                          maxRadius: 65,
+                          radius: 70,
                         ),
                         shape: CircleBorder(
                           side: BorderSide(color: Colors.white,width: 4)

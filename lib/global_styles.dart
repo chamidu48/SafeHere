@@ -10,6 +10,11 @@ final heading = GoogleFonts.poppins(
   fontSize: 30,
   fontWeight: FontWeight.w600,
 );
+final heading2 = GoogleFonts.poppins(
+  color: primaryColor,
+  fontSize: 26,
+  fontWeight: FontWeight.w500,
+);
 
 final subtitle = GoogleFonts.poppins(
   color: Colors.white,
@@ -19,13 +24,19 @@ final subtitle = GoogleFonts.poppins(
 
 final appbartext = GoogleFonts.poppins(
   color: Colors.white,
-  fontSize: 16,
+  fontSize: 18,
   fontWeight: FontWeight.w500
+);
+
+final bottomnavigationtext = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w500
 );
 
 final appbartitle = GoogleFonts.poppins(
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: FontWeight.w500
 );
 
@@ -70,5 +81,21 @@ final textbuttonlight=GoogleFonts.poppins(
     color: Colors.white,
     fontSize: 15,
     fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none
+);
+
+//--chats--
+
+final chatTileTitle=GoogleFonts.poppins(
+    color: Colors.white,
+    decoration: TextDecoration.none
+);
+
+final chatTileSubTitle=GoogleFonts.poppins(
+    color: Colors.grey,
+    decoration: TextDecoration.none
+);
+final chatTileTime=GoogleFonts.poppins(
+    color: Colors.white,
     decoration: TextDecoration.none
 );

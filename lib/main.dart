@@ -8,7 +8,11 @@ import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
 import 'package:safehere/features/auth/screens/user_info_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
+import 'package:safehere/screens/calls.dart';
+import 'package:safehere/screens/groups.dart';
 import 'package:safehere/screens/home_screen.dart';
+import 'package:safehere/screens/messages.dart';
+import 'package:safehere/screens/settings.dart';
 import 'package:safehere/widgets/custom_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -35,7 +39,11 @@ class MyApp extends StatelessWidget {
         '/signup':(context)=>SignUpScreen(),
         '/otp':(context)=>OTPscreen(),
         '/getuserinfo':(context)=>UserInfoSelectScreen(),
-        '/home':(context)=>HomeScreen()
+        '/home':(context)=>HomeScreen(),
+        '/mesenger':(context)=>Messenger(),
+        '/groups':(context)=>Groups(),
+        '/calls':(context)=>Calls(),
+        '/settings':(context)=>Settings()
       },
     );
   }
