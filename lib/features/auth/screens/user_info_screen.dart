@@ -35,12 +35,12 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
     final size=MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: appbarColor,
+      backgroundColor: appbarColor1,
       appBar: AppBar(
         elevation: 0,
         title: Text('Fill your details',style: appbartext,),
         centerTitle: true,
-        backgroundColor: appbarColor,
+        backgroundColor: appbarColor1,
         automaticallyImplyLeading: false,
         actions: [
           TextButton(onPressed: (){
@@ -54,7 +54,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
             Container(
               margin: EdgeInsets.only(top: 120),
               decoration: BoxDecoration(
-                color: Colors.white
+                color: bodyColor1
               ),
             ),
             Padding(
@@ -103,7 +103,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
     textInputAction: TextInputAction.done,
     decoration: InputDecoration(
       filled: true,
-      fillColor: myColorScheme[50],
+      fillColor: appbarColor1,
       enabledBorder: InputBorder.none,
       focusedBorder: InputBorder.none,
       errorBorder: InputBorder.none,
@@ -111,7 +111,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
       hintStyle: textfieldfilled,
       suffixIcon: InkWell(
           onTap: (){},
-          child: Icon(Icons.edit,color: primaryColor,size: 18,)
+          child: Icon(Icons.edit,color: Colors.white,size: 18,)
       ),
       ),
     textAlign: TextAlign.start,
@@ -124,7 +124,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
     maxLines: 2,
     decoration: InputDecoration(
       filled: true,
-      fillColor: myColorScheme[50],
+      fillColor: appbarColor1,
       enabledBorder: InputBorder.none,
       focusedBorder: InputBorder.none,
       errorBorder: InputBorder.none,
@@ -132,7 +132,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
       hintStyle: textfieldfilled,
       suffixIcon: InkWell(
           onTap: (){},
-          child: Icon(Icons.edit,color: primaryColor,size: 18,)
+          child: Icon(Icons.edit,color: Colors.white,size: 18,)
       ),
     ),
     textAlign: TextAlign.start,

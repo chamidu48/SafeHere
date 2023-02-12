@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:safehere/colors.dart';
@@ -20,66 +21,70 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              height: 120,
-              color: appbarColor,
-            ),
-            Column(
+        appBar: AppBar(
+          title: Text('Settings',style: appbartitle,),
+          centerTitle: true,
+          backgroundColor: bodyColor1,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back,color: Colors.white,),
+            onPressed: (){},
+          ),
+          actions: [
+            IconButton(
+              onPressed: (){},
+              icon: Icon(Icons.more_vert),
+            )
+          ],
+        ),
+        backgroundColor: bodyColor1,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(25, 30, 25, 5),
+            child: Column(
               children: [
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Material(
-                      shape: CircleBorder(
-                        side: BorderSide(color: Colors.white,width: 4)
+                Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  color: appbarColor1,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.symmetric(vertical: 30,horizontal: 20),
+                    leading: CircleAvatar(
+                      backgroundColor: chatcardSelectedColor,
+                      backgroundImage: NetworkImage(
+                        info[6]['profilePic'].toString(),
                       ),
-                      child: CircleAvatar(
-                        backgroundColor: chatcardSelectedColor,
-                        backgroundImage: NetworkImage(
-                          info[5]['profilePic'].toString(),
-                        ),
-                        radius: 70,
-                      ),
+                      radius: 40,
                     ),
-                  ],
+                    onTap: (){},
+                    title: Text(info[6]['name'].toString(),style: cardHeading,),
+                    subtitle: Text('_username_',style: cardSubtitle,),
+                    trailing: Icon(Icons.arrow_forward_ios,color: Colors.white,),
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(info[0]['name']!,style: heading2,)
-                  ],
-                ),
+                SizedBox(height: 40,),
+                Divider(color: appbarColor1,thickness: 1),
                 SizedBox(height: 20,),
                 Expanded(
                   child: ListView.builder(
                     itemCount: settings.length,
-                    itemBuilder: (BuildContext,int){
-                      return Card(
-                        color: appbarColor,
-                        elevation: 0,
-                        child: ListTile(
-                          splashColor: chatcardSelectedColor,
-                          selectedColor: chatcardSelectedColor,
-                          onTap: (){},
-                          leading: Icon(IconData[int],color: Colors.white,),
-                          title: Text(settings[int],style: chatTileTitle,),
-                          trailing: Icon(Icons.arrow_forward_ios,color: Colors.white,),
-                        ),
+                    itemBuilder: (BuildContext,index){
+                      return ListTile(
+                        onTap: (){},
+                        contentPadding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+                        tileColor: bodyColor1,
+                        leading: Icon(IconData[index],color: chatcardSelectedColor,),
+                        title: Text(settings[index],style: chatTileTitle,),
+                        trailing: Icon(Icons.arrow_forward_ios,color: Colors.white,),
                       );
                     },
                   ),
                 )
               ],
-            )
-          ],
-        ),
+            ),
+          ),
       )
     );
   }

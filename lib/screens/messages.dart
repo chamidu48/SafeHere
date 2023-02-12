@@ -16,19 +16,35 @@ class _MessengerState extends State<Messenger> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bodyColor,
+      appBar: AppBar(
+        title: Text('Messages',style: appbartitle,),
+        automaticallyImplyLeading: false,
+        backgroundColor: appbarColor1,
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: (){},
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: (){},
+            icon: Icon(Icons.more_vert),
+          )
+        ],
+      ),
+      backgroundColor: bodyColor1,
       body: ListView.builder(
         itemCount: info.length,
         itemBuilder: (BuildContext,int){
           return ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-            title: Text(info[int]['name']!,style: chatTileTitle),
-            subtitle: Text(info[int]['message']!,style: chatTileSubTitle,),
+            title: Text(info[int]['name']!.toString(),style: chatTileTitle),
+            subtitle: Text(info[int]['message']!.toString(),style: chatTileSubTitle,),
             trailing: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
-                Text(info[int]['time']!,style: chatTileTime,),
+                Text(info[int]['time']!.toString(),style: chatTileTime,),
                 Text('delivered',style: chatTileTime,)
               ],
             ),
@@ -39,8 +55,10 @@ class _MessengerState extends State<Messenger> {
               ),
               radius: 30,
             ),
-            tileColor: bodyColor,
-            onTap: (){},
+            tileColor: info[int]['seen']==true?chatcardSelectedColor:bodyColor1,
+            onTap: (){
+              Navigator.pushNamed(context, '/chatscreen');
+            },
             onLongPress: (){},
             splashColor: chatcardSelectedColor,
             focusColor: chatcardSelectedColor,

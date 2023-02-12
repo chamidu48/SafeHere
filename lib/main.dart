@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
 import 'package:safehere/features/auth/screens/user_info_screen.dart';
+import 'package:safehere/features/chat/screens/chat_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
 import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
         '/mesenger':(context)=>Messenger(),
         '/groups':(context)=>Groups(),
         '/calls':(context)=>Calls(),
-        '/settings':(context)=>Settings()
+        '/settings':(context)=>Settings(),
+        '/chatscreen':(context)=>ChatScreen(),
       },
     );
   }

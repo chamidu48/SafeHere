@@ -32,23 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bodyColor,
-      appBar: AppBar(
-        title: Text(titles[currentIndex],style: appbartitle,),
-        automaticallyImplyLeading: false,
-        backgroundColor: appbarColor,
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: (){},
-            icon: Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: (){},
-            icon: Icon(Icons.more_vert),
-          )
-        ],
-      ),
+      backgroundColor: bodyColor1,
       body: bodyScrenns[currentIndex],
       bottomNavigationBar: buildBottomNavigation(),
     );
@@ -57,12 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildBottomNavigation(){
     return Container(
       decoration: BoxDecoration(
-        color: bodyColor
+        color: appbarColor1
       ),
       padding: const EdgeInsets.only(bottom:20,left: 15,right: 15,top: 15),
       child: GNav(
         padding: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
-        backgroundColor: bodyColor,
+        backgroundColor:appbarColor1,
         color: Colors.white70,
         activeColor: Colors.white,
         tabBackgroundColor: chatcardSelectedColor,
