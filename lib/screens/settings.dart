@@ -43,25 +43,29 @@ class _SettingsState extends State<Settings> {
             padding: const EdgeInsets.fromLTRB(25, 30, 25, 5),
             child: Column(
               children: [
-                Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  color: appbarColor1,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.symmetric(vertical: 30,horizontal: 20),
-                    leading: CircleAvatar(
-                      backgroundColor: chatcardSelectedColor,
-                      backgroundImage: NetworkImage(
-                        info[6]['profilePic'].toString(),
-                      ),
-                      radius: 40,
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/userview');
+                  },
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    onTap: (){},
-                    title: Text(info[6]['name'].toString(),style: cardHeading,),
-                    subtitle: Text('_username_',style: cardSubtitle,),
-                    trailing: Icon(Icons.arrow_forward_ios,color: Colors.white,),
+                    color: appbarColor1,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(vertical: 30,horizontal: 20),
+                      leading: CircleAvatar(
+                        backgroundColor: chatcardSelectedColor,
+                        backgroundImage: NetworkImage(
+                          info[6]['profilePic'].toString(),
+                        ),
+                        radius: 40,
+                      ),
+                      title: Text(info[6]['name'].toString(),style: cardHeading,),
+                      subtitle: Text('_username_',style: cardSubtitle,),
+                      trailing: Icon(Icons.arrow_forward_ios,color: Colors.white,),
+                    ),
                   ),
                 ),
                 SizedBox(height: 40,),
