@@ -10,6 +10,11 @@ final heading = GoogleFonts.poppins(
   fontSize: 30,
   fontWeight: FontWeight.w600,
 );
+final heading2 = GoogleFonts.poppins(
+  color: primaryColor,
+  fontSize: 26,
+  fontWeight: FontWeight.w500,
+);
 
 final subtitle = GoogleFonts.poppins(
   color: Colors.white,
@@ -19,21 +24,45 @@ final subtitle = GoogleFonts.poppins(
 
 final appbartext = GoogleFonts.poppins(
   color: Colors.white,
-  fontSize: 16,
+  fontSize: 18,
   fontWeight: FontWeight.w500
 );
 
-final appbartitle = GoogleFonts.poppins(
+final bottomnavigationtext = GoogleFonts.poppins(
     color: Colors.white,
     fontSize: 18,
     fontWeight: FontWeight.w500
 );
 
+final appbartitle = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.w500
+);
+
 final subtitlebold = GoogleFonts.poppins(
-    color: primaryColor,
+    color: Colors.white,
     fontSize: 15,
     fontWeight: FontWeight.w500
 );
+
+final appbarStatus = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 12,
+    fontWeight: FontWeight.w500
+);
+
+final cardHeading = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w500
+);
+final cardSubtitle = GoogleFonts.poppins(
+    color: Colors.white70,
+    fontSize: 12,
+    fontWeight: FontWeight.w400
+);
+
 
 //--text fields--
 final textfield = GoogleFonts.poppins(
@@ -43,7 +72,7 @@ final textfield = GoogleFonts.poppins(
 );
 
 final textfieldfilled = GoogleFonts.poppins(
-  color: primaryColor,
+  color: Colors.white70,
   fontSize: 12,
   fontWeight: FontWeight.w500,
 );
@@ -67,8 +96,47 @@ final textbutton=GoogleFonts.poppins(
 );
 
 final textbuttonlight=GoogleFonts.poppins(
-    color: Colors.white,
+    color: chatcardSelectedColor,
     fontSize: 15,
     fontWeight: FontWeight.w500,
     decoration: TextDecoration.none
+);
+
+//--chats--
+
+final chatTileTitle=GoogleFonts.poppins(
+    color: Colors.white,
+    decoration: TextDecoration.none,
+    fontWeight: FontWeight.w500,
+  fontSize: 18
+);
+
+final chatTileSubTitle=GoogleFonts.poppins(
+    color: Colors.grey,
+    decoration: TextDecoration.none
+);
+final chatTileTime=GoogleFonts.poppins(
+    color: Colors.white,
+    decoration: TextDecoration.none
+);
+
+final mymessagetext = GoogleFonts.poppins(
+    color: primaryColor,
+    fontSize: 12,
+    fontWeight: FontWeight.w500
+);
+final mymessagetime = GoogleFonts.poppins(
+    color: primaryColor,
+    fontSize: 10,
+    fontWeight: FontWeight.w500
+);
+final sendermessagetext = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 12,
+    fontWeight: FontWeight.w500
+);
+final sendermessagetime = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 10,
+    fontWeight: FontWeight.w500
 );

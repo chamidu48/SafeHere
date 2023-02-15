@@ -7,12 +7,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
 import 'package:safehere/features/auth/screens/user_info_screen.dart';
+import 'package:safehere/features/chat/screens/chat_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
+import 'package:safehere/screens/calls.dart';
+import 'package:safehere/screens/groups.dart';
 import 'package:safehere/screens/home_screen.dart';
+import 'package:safehere/screens/messages.dart';
+import 'package:safehere/screens/settings.dart';
 import 'package:safehere/widgets/custom_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'features/auth/screens/signup_screen.dart';
+import 'features/user/user_view.dart';
 
 void main()=>runApp(MyApp());
 
@@ -35,7 +41,13 @@ class MyApp extends StatelessWidget {
         '/signup':(context)=>SignUpScreen(),
         '/otp':(context)=>OTPscreen(),
         '/getuserinfo':(context)=>UserInfoSelectScreen(),
-        '/home':(context)=>HomeScreen()
+        '/home':(context)=>HomeScreen(),
+        '/mesenger':(context)=>Messenger(),
+        '/groups':(context)=>Groups(),
+        '/calls':(context)=>Calls(),
+        '/settings':(context)=>Settings(),
+        '/chatscreen':(context)=>ChatScreen(),
+        'userview':(context)=>UserView()
       },
     );
   }
