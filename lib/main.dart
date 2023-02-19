@@ -18,6 +18,7 @@ import 'package:safehere/widgets/custom_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'features/auth/screens/signup_screen.dart';
+import 'features/user/user_edit.dart';
 import 'features/user/user_view.dart';
 
 void main()=>runApp(MyApp());
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
         '/calls':(context)=>Calls(),
         '/settings':(context)=>Settings(),
         '/chatscreen':(context)=>ChatScreen(),
-        'userview':(context)=>UserView()
+        '/useredit':(context)=>UserEdit(),
+        '/userview':(context)=>UserView()
       },
     );
   }

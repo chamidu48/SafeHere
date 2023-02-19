@@ -45,7 +45,7 @@ class _SettingsState extends State<Settings> {
               children: [
                 InkWell(
                   onTap: (){
-                    Navigator.pushNamed(context, '/userview');
+                    Navigator.pushNamed(context,'/useredit');
                   },
                   child: Card(
                     elevation: 0,

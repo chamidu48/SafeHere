@@ -17,7 +17,6 @@ ElevatedButton filledButton(VoidCallback onPressed,String text,Color color,Color
           borderRadius: BorderRadius.circular(10))
   ),
 );
-
 OutlinedButton outlinedButton(VoidCallback onPressed,String text,Color borderColor,Color textColor)=>OutlinedButton(
   onPressed: onPressed,
   child: Text(text),

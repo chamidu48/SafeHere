@@ -32,18 +32,27 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             SizedBox(width: 15,),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    info[0]['name'].toString(),
-                    style: appbartitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.fade,
-                  ),
-                  Text('Online',style: appbarStatus,)
-                ],
+              child: InkWell(
+                onTap: (){
+                  Navigator.pushNamed(context, '/userview');
+                },
+                focusColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      info[0]['name'].toString(),
+                      style: appbartitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                    ),
+                    Text('Online',style: appbarStatus,)
+                  ],
+                ),
               ),
             ),
           ],

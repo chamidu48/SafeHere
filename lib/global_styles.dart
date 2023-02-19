@@ -52,6 +52,18 @@ final appbarStatus = GoogleFonts.poppins(
     fontWeight: FontWeight.w500
 );
 
+final userHeading = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+);
+
+final verified = GoogleFonts.poppins(
+  color: Colors.green,
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+);
+
 final cardHeading = GoogleFonts.poppins(
     color: Colors.white,
     fontSize: 18,
