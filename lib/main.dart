@@ -7,12 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
 import 'package:safehere/features/auth/screens/user_info_screen.dart';
+import 'package:safehere/features/auth/screens/verify_stepper.dart';
 import 'package:safehere/features/chat/screens/chat_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
 import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
 import 'package:safehere/screens/home_screen.dart';
 import 'package:safehere/screens/messages.dart';
+import 'package:safehere/screens/report_screen.dart';
 import 'package:safehere/screens/settings.dart';
 import 'package:safehere/widgets/custom_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,7 +51,9 @@ class MyApp extends StatelessWidget {
         '/settings':(context)=>Settings(),
         '/chatscreen':(context)=>ChatScreen(),
         '/useredit':(context)=>UserEdit(),
-        '/userview':(context)=>UserView()
+        '/userview':(context)=>UserView(),
+        '/reportscreen':(context)=>ReportScreen(),
+        '/verify':(context)=>DocumentVerify()
       },
     );
   }

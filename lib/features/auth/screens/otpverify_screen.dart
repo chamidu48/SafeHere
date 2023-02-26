@@ -93,7 +93,7 @@ import '../../../widgets/custom_button.dart';
                            ),
                            SizedBox(height: 30,),
                            filledButton((){
-                           Navigator.popAndPushNamed(context, '/getuserinfo');
+                           Navigator.popAndPushNamed(context, '/verify');
                            }, 'Verify', Colors.white, primaryColor)
                          ],
                        ),

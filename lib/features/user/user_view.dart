@@ -193,7 +193,9 @@ class _UserViewState extends State<UserView> {
                         SizedBox(height: 5,),
                         ElevatedButton.icon(
                           icon:Icon(Icons.report_gmailerrorred_outlined),
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.pushNamed(context, '/reportscreen');
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                               minimumSize: Size(double.infinity, 40),

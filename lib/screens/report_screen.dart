@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safehere/colors.dart';
 import 'package:safehere/global_styles.dart';
+import 'package:safehere/info.dart';
 import 'package:safehere/widgets/buttons.dart';
 class ReportScreen extends StatefulWidget {
   const ReportScreen({Key? key}) : super(key: key);
@@ -14,218 +15,192 @@ class _ReportScreenState extends State<ReportScreen> {
 
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: myColorScheme[50],
-      body:SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: <Widget>[
-              Container(
-
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
-                ),
-                padding: EdgeInsets.all(50),
-                child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:<Widget>[
-                        Text(
-                          'Report',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                          ),
+      appBar: AppBar(
+        backgroundColor: appbarColor1,
+        title: Text('Submit a Report',style: appbartext,),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      backgroundColor: bodyColor1,
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 35,vertical: 20),
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: appbarColor1,
+                  borderRadius: BorderRadius.circular(5)
+              ),
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:<Widget>[
+                      Text(
+                        'Report',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Person Name',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 90,
-                        ),
-                      ]
-                  ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                          info[0]['name'].toString(),
+                        style: subtitle
+                      ),
+                    ]
                 ),
               ),
-          Container(
-            width: 200,
-            child: Column(
+            ),
+            SizedBox(height: 20,),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "What is the reason?",
+                    style: subtitlebold
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 15,),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    color: appbarColor1,
+                    child: DropdownButton<String>(
+                      value: dropdownValue,
+                      icon: Icon(Icons.arrow_drop_down),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: textfieldfilled,
+                      onChanged: (String? newValue){
+                        setState(() {
+                          dropdownValue = newValue!;
+                        });
+                      },
+                      dropdownColor: appbarColor1,
+                      items: <String>['Select Reason','Option 1', 'Option 2']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value,style: textfieldfilled,),
+                        );
+                      }).toList(),
+                      iconEnabledColor: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10,),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Text(
-                  "What is the reason?",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                  'Submit Proof',
+                  style: subtitlebold
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  onTap: (){
+                    print('upload');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Upload',
+                            style: buttonwhite
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.file_upload,
+                            size: 25,
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                DropdownButton<String>(
-                  value: dropdownValue,
-                  icon: Icon(Icons.arrow_downward),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'This will be visible to the user He is a strong animal with large eyes,'
+                      ' four legs, a large head, and sharp teeth that help him to hunt and eat his prey.',
+                  textAlign: TextAlign.center,
+                  style: cardSubtitle
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: (){print('blocked');},
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Text(
+                          'Block user',style: buttonwhite,
+                      ),
+                    ),
                   ),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.black,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: (){print('reported');},
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Submit',
+                        style: buttonblue
+                      ),
+                    ),
                   ),
-                  onChanged: (String? newValue){
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  items: <String>['Select Reason','Option 1', 'Option 2']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                       print('cancelled');
+                    },
+                    child: Text(
+                      'Cancel',
+                      style: textbutton
+                    ),
+                  ),
                 ),
               ],
-            ),
-          ),
-              Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Submit Proof',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  'Upload',
-                                  style: TextStyle(
-                                      fontSize: 16
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  Icons.file_upload,
-                                  size: 25,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 100,
-                          child: Center(
-                            child: Text(
-                              'This will be visible to the user He is a strong animal with large eyes,'
-                                  ' four legs, a large head, and sharp teeth that help him to hunt and eat his prey.'
-                                  ' His body is covered with small greyish hair that gives him a good-looking appearance.'
-                                  ' A cub has dark spots on his body that gradually fade away with age.'
-                                  ' It has sharp teeth and claws that can be used to capture prey.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 10,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                          ),
-                          child: Center(
-                            child: Text(
-                                'Block user'
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Submit',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 50,
-                          child: Center(
-                            child: InkWell(
-                              onTap: () {
-                                // Perform action on tap
-                              },
-                              child: Text(
-                                'Cancel',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ))
-            ],
-          ),
-        ),
+            )
+          ],
+        )
       )
     );
   }
