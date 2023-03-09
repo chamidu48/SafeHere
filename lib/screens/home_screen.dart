@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
         activeColor: Colors.white,
         tabBackgroundColor: chatcardSelectedColor,
         selectedIndex: currentIndex,
-        gap: 10,
-        iconSize: 24,
+        gap: 8,
+        iconSize: 20,
         tabs: [
           GButton(icon: Icons.messenger_outline_rounded),
           GButton(icon: Icons.group),

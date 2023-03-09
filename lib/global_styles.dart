@@ -15,11 +15,21 @@ final heading2 = GoogleFonts.poppins(
   fontSize: 26,
   fontWeight: FontWeight.w500,
 );
+final headingbold = GoogleFonts.poppins(
+  color: primaryColor,
+  fontSize: 22,
+  fontWeight: FontWeight.w600,
+);
 
 final subtitle = GoogleFonts.poppins(
   color: Colors.white,
   fontSize: 15,
   fontWeight: FontWeight.w400
+);
+final bodytextblue = GoogleFonts.poppins(
+    color: primaryColor,
+    fontSize: 12,
+    fontWeight: FontWeight.w500
 );
 
 final appbartext = GoogleFonts.poppins(
@@ -50,6 +60,18 @@ final appbarStatus = GoogleFonts.poppins(
     color: Colors.white,
     fontSize: 12,
     fontWeight: FontWeight.w500
+);
+
+final userHeading = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+);
+
+final verified = GoogleFonts.poppins(
+  color: Colors.green,
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
 );
 
 final cardHeading = GoogleFonts.poppins(
@@ -83,6 +105,12 @@ final buttonwhite=GoogleFonts.poppins(
   fontSize: 15,
   fontWeight: FontWeight.w500
 );
+final buttonwhitebold=GoogleFonts.poppins(
+    color: primaryColor,
+    fontSize: 15,
+    fontWeight: FontWeight.w600
+);
+
 final buttonblue=GoogleFonts.poppins(
     color: Colors.white,
     fontSize: 15,
@@ -108,7 +136,7 @@ final chatTileTitle=GoogleFonts.poppins(
     color: Colors.white,
     decoration: TextDecoration.none,
     fontWeight: FontWeight.w500,
-  fontSize: 18
+  fontSize: 15
 );
 
 final chatTileSubTitle=GoogleFonts.poppins(
