@@ -1,23 +1,16 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:safehere/global_styles.dart';
-import 'package:safehere/widgets/buttons.dart';
-import 'package:safehere/widgets/custom_button.dart';
 
-import '../../../colors.dart';
+import '../../colors.dart';
+import '../../global_styles.dart';
 
-class UserInfoSelectScreen extends StatefulWidget {
-  const UserInfoSelectScreen({Key? key}) : super(key: key);
+class UserView extends StatefulWidget {
+  const UserView({Key? key}) : super(key: key);
 
   @override
-  _UserInfoSelectScreenState createState() => _UserInfoSelectScreenState();
+  _UserViewState createState() => _UserViewState();
 }
 
-class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
-
+class _UserViewState extends State<UserView> {
   final _nameFieldController=TextEditingController();
   final _bioFieldController=TextEditingController();
 
@@ -49,52 +42,52 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
         ],
       ),
       body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 120),
-              decoration: BoxDecoration(
-                color: bodyColor1
+          child: Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 120),
+                decoration: BoxDecoration(
+                    color: bodyColor1
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35,vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Material(
-                        child: CircleAvatar(
-                          foregroundColor: Colors.white,
-                          backgroundColor: myColorScheme[400],
-                          child: Text('Chnage Photo'),
-                          radius: 70,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 35,vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 30,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Material(
+                          child: CircleAvatar(
+                            foregroundColor: Colors.white,
+                            backgroundColor: myColorScheme[400],
+                            child: Text('Chnage Photo'),
+                            radius: 70,
+                          ),
+                          shape: CircleBorder(
+                              side: BorderSide(color: Colors.white,width: 4)
+                          ),
+                          color: Colors.white,
+                          clipBehavior: Clip.hardEdge,
                         ),
-                        shape: CircleBorder(
-                          side: BorderSide(color: Colors.white,width: 4)
-                        ),
-                        color: Colors.white,
-                        clipBehavior: Clip.hardEdge,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30,),
-                  Text('Username',style: subtitlebold,),
-                  SizedBox(height: 10,),
-                  buildNameField(),
-                  SizedBox(height: 30,),
-                  Text('Bio',style: subtitlebold,),
-                  SizedBox(height: 10,),
-                  buildbioField(),
-                ],
-              ),
-            )
-          ],
-        )
-    ),
+                      ],
+                    ),
+                    SizedBox(height: 30,),
+                    Text('Username',style: subtitlebold,),
+                    SizedBox(height: 10,),
+                    buildNameField(),
+                    SizedBox(height: 30,),
+                    Text('Bio',style: subtitlebold,),
+                    SizedBox(height: 10,),
+                    buildbioField(),
+                  ],
+                ),
+              )
+            ],
+          )
+      ),
     );
   }
   Widget buildNameField()=>TextField(
@@ -113,7 +106,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
           onTap: (){},
           child: Icon(Icons.edit,color: Colors.white,size: 18,)
       ),
-      ),
+    ),
     textAlign: TextAlign.start,
   );
   Widget buildbioField()=>TextField(

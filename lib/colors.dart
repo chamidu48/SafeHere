@@ -12,6 +12,9 @@ const backgroundGradient=LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
 );
+const bodyColor1=Color(0xff182129);
+const appbarColor1=Color(0xff2A3743);
+
 
 const MaterialColor myColorScheme= MaterialColor(0xff4278A8,<int,Color>{
   50:Color(0xffedf3f8),
