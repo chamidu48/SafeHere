@@ -18,7 +18,7 @@ class _VerifyStepperState extends State<VerifyStepper> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: appbarColor,
-        title: Text('Verify',style: appbartext),
+        title: Text('VerifyStepper',style: appbartext),
         centerTitle: true,
       ),
     );
