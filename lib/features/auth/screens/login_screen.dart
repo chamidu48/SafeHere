@@ -32,9 +32,11 @@ class _LoginScreenState extends State<LoginScreen> {
     showPhoneCode: true, // optional. Shows phone code before the country name.
     onSelect: (Country _country) {
       setState(() {
-        print(_country.countryCode);
+        print(_country.phoneCode);
+        _ccodeController.text="+"+_country.phoneCode;
       });
     },
+    
   );
 
   @override
@@ -152,6 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
     controller: _ccodeController,
     keyboardType: TextInputType.number,
     textInputAction: TextInputAction.done,
+    style: textfield,
     decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),

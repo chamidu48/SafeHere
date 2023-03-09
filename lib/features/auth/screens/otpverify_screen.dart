@@ -73,9 +73,9 @@ import '../../../widgets/custom_button.dart';
                              hasUnderline: false,
                              onDone: (pin){},
                              pinTextStyle: textfield,
-                             pinBoxWidth: 45,
+                             pinBoxWidth: 35,
                              hasTextBorderColor: Colors.white,
-                             pinBoxRadius: 10,
+                             pinBoxRadius: 8,
                              pinBoxBorderWidth: 1,
                              pinBoxColor: Colors.white.withOpacity(0.2),
                              pinBoxHeight: 60,
@@ -93,7 +93,7 @@ import '../../../widgets/custom_button.dart';
                            ),
                            SizedBox(height: 30,),
                            filledButton((){
-                           Navigator.popAndPushNamed(context, '/getuserinfo');
+                           Navigator.popAndPushNamed(context, '/verify');
                            }, 'Verify', Colors.white, primaryColor)
                          ],
                        ),

@@ -81,14 +81,20 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30,),
-                  Text('Username',style: subtitlebold,),
-                  SizedBox(height: 10,),
-                  buildNameField(),
-                  SizedBox(height: 30,),
-                  Text('Bio',style: subtitlebold,),
-                  SizedBox(height: 10,),
-                  buildbioField(),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        SizedBox(height: 30,),
+                        Text('Username',style: subtitlebold,),
+                        SizedBox(height: 10,),
+                        buildNameField(),
+                        SizedBox(height: 30,),
+                        Text('Bio',style: subtitlebold,),
+                        SizedBox(height: 10,),
+                        buildbioField(),
+                      ],
+                    ),
+                  )
                 ],
               ),
             )
@@ -101,6 +107,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
     controller: _nameFieldController,
     keyboardType: TextInputType.text,
     textInputAction: TextInputAction.done,
+    style: textfield,
     decoration: InputDecoration(
       filled: true,
       fillColor: appbarColor1,
@@ -120,6 +127,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
     controller: _bioFieldController,
     keyboardType: TextInputType.text,
     textInputAction: TextInputAction.done,
+    style: textfield,
     minLines: 2,
     maxLines: 2,
     decoration: InputDecoration(

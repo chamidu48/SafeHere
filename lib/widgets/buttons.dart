@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ElevatedButton filledButton(VoidCallback onPressed,String text,Color color,Color textColor)=>ElevatedButton(
@@ -17,7 +18,6 @@ ElevatedButton filledButton(VoidCallback onPressed,String text,Color color,Color
           borderRadius: BorderRadius.circular(10))
   ),
 );
-
 OutlinedButton outlinedButton(VoidCallback onPressed,String text,Color borderColor,Color textColor)=>OutlinedButton(
   onPressed: onPressed,
   child: Text(text),
