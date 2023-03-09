@@ -118,14 +118,14 @@ class _UserViewState extends State<UserView> {
                       height: 20,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton.icon(
                           icon:Icon(Icons.call),
                           onPressed: (){},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: appbarColor1,
-                              minimumSize: Size(150, 40)
+                              minimumSize: Size(120, 40)
                           ),
                           label: Text('Call',style: GoogleFonts.poppins(
                               color: Colors.white,
@@ -133,12 +133,13 @@ class _UserViewState extends State<UserView> {
                               fontWeight: FontWeight.w500
                           )),
                         ),
+                        SizedBox(width: 20,),
                         ElevatedButton.icon(
                           icon: Icon(Icons.message),
                           onPressed: (){},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: primaryColor,
-                              minimumSize: Size(150, 40)
+                              minimumSize: Size(120, 40)
                           ),
                           label: Text('Message',style: GoogleFonts.poppins(
                               color: Colors.white,

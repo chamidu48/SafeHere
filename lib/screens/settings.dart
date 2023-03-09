@@ -77,7 +77,7 @@ class _SettingsState extends State<Settings> {
                     itemBuilder: (BuildContext,index){
                       return ListTile(
                         onTap: (){},
-                        contentPadding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
                         tileColor: bodyColor1,
                         leading: Icon(IconData[index],color: chatcardSelectedColor,),
                         title: Text(settings[index],style: chatTileTitle,),

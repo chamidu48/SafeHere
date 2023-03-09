@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:safehere/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
 import 'package:safehere/features/auth/screens/user_info_screen.dart';
+import 'package:safehere/features/auth/screens/verify_documentselect.dart';
 import 'package:safehere/features/auth/screens/verify_stepper.dart';
 import 'package:safehere/features/chat/screens/chat_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
@@ -16,10 +16,10 @@ import 'package:safehere/screens/home_screen.dart';
 import 'package:safehere/screens/messages.dart';
 import 'package:safehere/screens/report_screen.dart';
 import 'package:safehere/screens/settings.dart';
-import 'package:safehere/widgets/custom_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'features/auth/screens/signup_screen.dart';
+import 'features/auth/screens/verify.dart';
 import 'features/user/user_edit.dart';
 import 'features/user/user_view.dart';
 
@@ -53,7 +53,9 @@ class MyApp extends StatelessWidget {
         '/useredit':(context)=>UserEdit(),
         '/userview':(context)=>UserView(),
         '/reportscreen':(context)=>ReportScreen(),
-        '/verify':(context)=>DocumentVerify()
+        '/verify':(context)=>Verify(),
+        '/verifystepper':(context)=>VerifyStepper(),
+        '/selectdocument':(context)=>DocumentSelect()
       },
     );
   }

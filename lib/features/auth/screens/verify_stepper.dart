@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 
-class DocumentVerify extends StatefulWidget {
-  const DocumentVerify({Key? key}) : super(key: key);
+import '../../../colors.dart';
+import '../../../global_styles.dart';
+
+class VerifyStepper extends StatefulWidget {
+  const VerifyStepper({Key? key}) : super(key: key);
 
   @override
-  _DocumentVerifyState createState() => _DocumentVerifyState();
+  _VerifyStepperState createState() => _VerifyStepperState();
 }
 
-class _DocumentVerifyState extends State<DocumentVerify> {
+class _VerifyStepperState extends State<VerifyStepper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('document verify'),
+        elevation: 0,
+        backgroundColor: appbarColor,
+        title: Text('Verify',style: appbartext),
+        centerTitle: true,
       ),
     );
   }
