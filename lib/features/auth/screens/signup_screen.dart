@@ -5,7 +5,7 @@ import 'package:safehere/widgets/buttons.dart';
 
 import '../../../colors.dart';
 import '../../../global_styles.dart';
-import '../../../widgets/custom_button.dart';
+import 'package:country_picker/country_picker.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -29,6 +29,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _numberController.dispose();
     _ccodeController.dispose();
   }
+
+  void countryPicker()=>showCountryPicker(
+    context: context,
+    showPhoneCode: true, // optional. Shows phone code before the country name.
+    onSelect: (Country _country) {
+      setState(() {
+        print(_country.phoneCode);
+        _ccodeController.text="+"+_country.phoneCode;
+      });
+    },
+      countryListTheme: CountryListThemeData(
+        flagSize: 25,
+        backgroundColor: bodyColor1,
+        textStyle: textfield,
+        bottomSheetHeight: 500, // Optional. Country list modal height
+        //Optional. Sets the border radius for the bottomsheet.
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        //Optional. Styles the search field.
+        inputDecoration: InputDecoration(
+          labelText: 'Search',
+          labelStyle: textfield,
+          hintText: 'Start typing to search',
+          hintStyle: textfield,
+          prefixIcon: const Icon(Icons.search,color: Colors.white,),
+
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.white,width: 1)
+          ),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.white,width: 2)
+          ),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.red,width: 2)
+          ),
+        ),
+      )
+
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +122,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: buildCCode(),
+                                child: InkWell(
+                                    onTap:countryPicker,
+                                    child: buildCCode()
+                                ),
                               ),
                               SizedBox(width: 8,),
                               Expanded(
@@ -192,6 +239,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget buildCCode()=>TextField(
     controller: _ccodeController,
     enabled: false,
+    style: textfield,
     decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),

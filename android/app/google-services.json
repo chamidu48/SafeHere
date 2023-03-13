@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "109316135361",
+    "project_id": "safehere-backend",
+    "storage_bucket": "safehere-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109316135361:android:cd2aeebcde37795bc83740",
+        "android_client_info": {
+          "package_name": "com.safehere.safehere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109316135361-qm774t5mnrkvvubl5ppuv8d69c01q8c5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfUD_WqNd134HFLTEtHQYUiKq-MJSiBh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109316135361-qm774t5mnrkvvubl5ppuv8d69c01q8c5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

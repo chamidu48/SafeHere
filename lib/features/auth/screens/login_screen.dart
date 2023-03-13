@@ -36,8 +36,38 @@ class _LoginScreenState extends State<LoginScreen> {
         _ccodeController.text="+"+_country.phoneCode;
       });
     },
-    
-  );
+    countryListTheme: CountryListThemeData(
+      flagSize: 25,
+      backgroundColor: bodyColor1,
+      textStyle: textfield,
+      bottomSheetHeight: 500, // Optional. Country list modal height
+      //Optional. Sets the border radius for the bottomsheet.
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20.0),
+        topRight: Radius.circular(20.0),
+      ),
+      //Optional. Styles the search field.
+      inputDecoration: InputDecoration(
+        labelText: 'Search',
+        labelStyle: textfield,
+        hintText: 'Start typing to search',
+        hintStyle: textfield,
+        prefixIcon: const Icon(Icons.search,color: Colors.white,),
+
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.white,width: 1)
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.white,width: 2)
+        ),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.red,width: 2)
+        ),
+    ),
+  ));
 
   @override
   Widget build(BuildContext context) {
