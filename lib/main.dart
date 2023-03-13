@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:safehere/colors.dart';
@@ -23,7 +24,8 @@ import 'features/auth/screens/verify.dart';
 import 'features/user/user_edit.dart';
 import 'features/user/user_view.dart';
 
-void main()=>runApp(MyApp());
+void main()=>runApp(
+    MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
