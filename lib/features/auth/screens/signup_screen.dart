@@ -147,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           SizedBox(height: 40,),
                           filledButton((){
-                            Navigator.popAndPushNamed(context, '/getuserinfo');
+                            // Navigator.popAndPushNamed(context, '/getuserinfo');
                           }, 'Continue', Colors.white, primaryColor)
                         ],
                       ),

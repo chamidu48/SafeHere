@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:safehere/colors.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
@@ -11,6 +12,7 @@ import 'package:safehere/features/auth/screens/verify_documentselect.dart';
 import 'package:safehere/features/auth/screens/verify_stepper.dart';
 import 'package:safehere/features/chat/screens/chat_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
+import 'package:safehere/firebase_options.dart';
 import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
 import 'package:safehere/screens/home_screen.dart';
@@ -24,8 +26,12 @@ import 'features/auth/screens/verify.dart';
 import 'features/user/user_edit.dart';
 import 'features/user/user_view.dart';
 
-void main()=>runApp(
-    MyApp());
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(
+      const ProviderScope(child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
