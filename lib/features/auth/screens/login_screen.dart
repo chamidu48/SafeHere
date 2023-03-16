@@ -1,30 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:safehere/global_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:safehere/widgets/buttons.dart';
 
 import 'package:country_picker/country_picker.dart';
 import '../../../colors.dart';
+import '../../../common/utils/utils.dart';
+import '../controller/auth_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _numberController=TextEditingController();
   final _ccodeController=TextEditingController();
   String countrycode='+1';
+  Country? country;
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     _numberController.dispose();
+    _ccodeController.dispose();
   }
 
   void countryPicker()=>showCountryPicker(
@@ -34,10 +39,52 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         print(_country.phoneCode);
         _ccodeController.text="+"+_country.phoneCode;
+        country=_country;
       });
     },
-    
-  );
+    countryListTheme: CountryListThemeData(
+      flagSize: 25,
+      backgroundColor: bodyColor1,
+      textStyle: textfield,
+      bottomSheetHeight: 500, // Optional. Country list modal height
+      //Optional. Sets the border radius for the bottomsheet.
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20.0),
+        topRight: Radius.circular(20.0),
+      ),
+      //Optional. Styles the search field.
+      inputDecoration: InputDecoration(
+        labelText: 'Search',
+        labelStyle: textfield,
+        hintText: 'Start typing to search',
+        hintStyle: textfield,
+        prefixIcon: const Icon(Icons.search,color: Colors.white,),
+
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.white,width: 1)
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.white,width: 2)
+        ),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.red,width: 2)
+        ),
+    ),
+  ));
+
+  void sendPhoneNumber() {
+    String phoneNumber = _numberController.text.trim();
+    if (country != null && phoneNumber.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
+    } else {
+      showSnackBar(context: context, content: 'Fill out all the fields');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,9 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           SizedBox(height: 40,),
-                          filledButton((){
-                              Navigator.popAndPushNamed(context, '/otp');
-                          }, 'Login', Colors.white, primaryColor)
+                          filledButton(sendPhoneNumber,
+                              'Login', Colors.white, primaryColor)
                         ],
                       ),
                     )
@@ -129,6 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
     controller: _numberController,
     keyboardType: TextInputType.number,
     textInputAction: TextInputAction.done,
+    style: textfield,
     decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),

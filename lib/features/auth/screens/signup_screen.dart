@@ -1,24 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:safehere/widgets/buttons.dart';
 
 import '../../../colors.dart';
+import '../../../common/utils/utils.dart';
 import '../../../global_styles.dart';
-import '../../../widgets/custom_button.dart';
+import 'package:country_picker/country_picker.dart';
 
-class SignUpScreen extends StatefulWidget {
+import '../controller/auth_controller.dart';
+
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _nameFieldController=TextEditingController();
   final _emailFieldController=TextEditingController();
   final _numberController=TextEditingController();
   final _ccodeController=TextEditingController();
+
+  Country? country;
 
   @override
   void dispose() {
@@ -28,6 +34,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailFieldController.dispose();
     _numberController.dispose();
     _ccodeController.dispose();
+  }
+
+  void countryPicker()=>showCountryPicker(
+    context: context,
+    showPhoneCode: true, // optional. Shows phone code before the country name.
+    onSelect: (Country _country) {
+      setState(() {
+        print(_country.phoneCode);
+        _ccodeController.text="+"+_country.phoneCode;
+        country=_country;
+      });
+    },
+      countryListTheme: CountryListThemeData(
+        flagSize: 25,
+        backgroundColor: bodyColor1,
+        textStyle: textfield,
+        bottomSheetHeight: 500, // Optional. Country list modal height
+        //Optional. Sets the border radius for the bottomsheet.
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        //Optional. Styles the search field.
+        inputDecoration: InputDecoration(
+          labelText: 'Search',
+          labelStyle: textfield,
+          hintText: 'Start typing to search',
+          hintStyle: textfield,
+          prefixIcon: const Icon(Icons.search,color: Colors.white,),
+
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.white,width: 1)
+          ),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.white,width: 2)
+          ),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.red,width: 2)
+          ),
+        ),
+      )
+
+  );
+
+  void sendPhoneNumber() {
+    String phoneNumber = _numberController.text.trim();
+    if (country != null && phoneNumber.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
+    } else {
+      showSnackBar(context: context, content: 'Fill out all the fields');
+    }
   }
 
   @override
@@ -78,7 +140,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: buildCCode(),
+                                child: InkWell(
+                                    onTap:countryPicker,
+                                    child: buildCCode()
+                                ),
                               ),
                               SizedBox(width: 8,),
                               Expanded(
@@ -99,9 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ],
                           ),
                           SizedBox(height: 40,),
-                          filledButton((){
-                            Navigator.popAndPushNamed(context, '/getuserinfo');
-                          }, 'Continue', Colors.white, primaryColor)
+                          filledButton(sendPhoneNumber, 'Continue', Colors.white, primaryColor)
                         ],
                       ),
                     )
@@ -168,6 +231,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     controller: _numberController,
     keyboardType: TextInputType.number,
     textInputAction: TextInputAction.done,
+    style: textfield,
     decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -192,6 +256,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget buildCCode()=>TextField(
     controller: _ccodeController,
     enabled: false,
+    style: textfield,
     decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -209,7 +274,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(color: Colors.white,width: 1)
       ),
-      hintText: '+94',
+      hintText: '+1',
       hintStyle: textfield,
       filled: true,
       fillColor: myColorScheme[400],

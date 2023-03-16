@@ -26,6 +26,11 @@ final subtitle = GoogleFonts.poppins(
   fontSize: 15,
   fontWeight: FontWeight.w400
 );
+final subtitleblue = GoogleFonts.poppins(
+    color: primaryColor,
+    fontSize: 15,
+    fontWeight: FontWeight.w400
+);
 final bodytextblue = GoogleFonts.poppins(
     color: primaryColor,
     fontSize: 12,
