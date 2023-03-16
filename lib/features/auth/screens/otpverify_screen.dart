@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:safehere/common/utils/utils.dart';
 import 'package:safehere/widgets/buttons.dart';
 
 import '../../../colors.dart';
 import '../../../global_styles.dart';
-import '../../../widgets/custom_button.dart';
 import '../controller/auth_controller.dart';
 
 
@@ -23,11 +23,12 @@ import '../controller/auth_controller.dart';
     _pinCodeController.dispose();
   }
 
-   void verifyOTP(WidgetRef ref, BuildContext context, String userOTP) {
+   void verifyOTP(WidgetRef ref, BuildContext context, String userOTP,) {
      ref.read(authControllerProvider).verifyOTP(
        context,
        verificationId,
        userOTP,
+       false
      );
    }
 
@@ -106,7 +107,7 @@ import '../controller/auth_controller.dart';
                            ),
                            SizedBox(height: 30,),
                            filledButton((){
-                           Navigator.popAndPushNamed(context, '/verify');
+                           showSnackBar(context: context, content: 'Please enter the code first');
                            }, 'Verify', Colors.white, primaryColor)
                          ],
                        ),

@@ -33,7 +33,7 @@ class AuthRepository{
         codeSent: ((String verificationId, int? resendToken) async {
           Navigator.pushNamed(
             context,
-            '/otp',
+            '/otpsignin',
             arguments: verificationId,
           );
         }),
@@ -48,11 +48,15 @@ class AuthRepository{
     required BuildContext context,
     required String verificationId,
     required userOTP,
+    required bool isSignIn,
   })async {
     try{
       PhoneAuthCredential credential=PhoneAuthProvider.credential(verificationId: verificationId, smsCode: userOTP);
       await auth.signInWithCredential(credential);
-      Navigator.pushNamedAndRemoveUntil(
+      isSignIn?Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/verify', (route) => false,
+      ):Navigator.pushNamedAndRemoveUntil(
         context,
         '/home', (route) => false,
       );
@@ -61,5 +65,4 @@ class AuthRepository{
       showSnackBar(context: context, content: e.toString() );
     }
   }
-
 }
