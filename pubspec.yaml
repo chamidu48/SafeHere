@@ -41,6 +41,9 @@ dependencies:
   country_picker: ^2.0.19
   google_nav_bar: ^5.0.6
   sliding_up_panel: ^2.0.0+1
+  firebase_auth: ^4.2.10
+  cloud_firestore: ^4.4.4
+  flutter_riverpod: ^2.3.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +75,7 @@ flutter:
     - assets/svg/face_id.svg
     - assets/svg/verify.svg
     - assets/images/profilepic.jpg
+    - assets/images/id_card.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

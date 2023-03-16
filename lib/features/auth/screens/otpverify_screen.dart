@@ -1,31 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:safehere/common/utils/utils.dart';
 import 'package:safehere/widgets/buttons.dart';
 
 import '../../../colors.dart';
 import '../../../global_styles.dart';
-import '../../../widgets/custom_button.dart';
- class OTPscreen extends StatefulWidget {
-   const OTPscreen({Key? key}) : super(key: key);
+import '../controller/auth_controller.dart';
 
-   @override
-   _OTPscreenState createState() => _OTPscreenState();
- }
 
- class _OTPscreenState extends State<OTPscreen> {
+ class OTPscreen extends ConsumerWidget {
+
+   String verificationId='';
+
+   OTPscreen({Key? key}) : super(key: key);
 
    final _pinCodeController=TextEditingController();
 
    @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     _pinCodeController.dispose();
   }
 
+   void verifyOTP(WidgetRef ref, BuildContext context, String userOTP,) {
+     ref.read(authControllerProvider).verifyOTP(
+       context,
+       verificationId,
+       userOTP,
+       false
+     );
+   }
+
+
    @override
-   Widget build(BuildContext context) {
+   Widget build(BuildContext context,WidgetRef ref) {
+
+     verificationId=ModalRoute.of(context)!.settings.arguments as String;
+
      return Scaffold(
        body: Stack(
          children: [
@@ -71,7 +83,9 @@ import '../../../widgets/custom_button.dart';
                              errorBorderColor: Colors.red,
                              autofocus: false,
                              hasUnderline: false,
-                             onDone: (pin){},
+                             onDone: (pin){
+                               verifyOTP(ref, context, pin);
+                             },
                              pinTextStyle: textfield,
                              pinBoxWidth: 35,
                              hasTextBorderColor: Colors.white,
@@ -93,7 +107,7 @@ import '../../../widgets/custom_button.dart';
                            ),
                            SizedBox(height: 30,),
                            filledButton((){
-                           Navigator.popAndPushNamed(context, '/verify');
+                           showSnackBar(context: context, content: 'Please enter the code first');
                            }, 'Verify', Colors.white, primaryColor)
                          ],
                        ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:safehere/colors.dart';
 import 'package:safehere/features/auth/screens/login_screen.dart';
 import 'package:safehere/features/auth/screens/otpverify_screen.dart';
@@ -11,6 +12,7 @@ import 'package:safehere/features/auth/screens/verify_documentselect.dart';
 import 'package:safehere/features/auth/screens/verify_stepper.dart';
 import 'package:safehere/features/chat/screens/chat_screen.dart';
 import 'package:safehere/features/landing/screens/landing_screen.dart';
+import 'package:safehere/firebase_options.dart';
 import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
 import 'package:safehere/screens/home_screen.dart';
@@ -19,13 +21,19 @@ import 'package:safehere/screens/report_screen.dart';
 import 'package:safehere/screens/settings.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'features/auth/screens/otpverify_signin.dart';
 import 'features/auth/screens/signup_screen.dart';
 import 'features/auth/screens/verify.dart';
+import 'features/auth/screens/verify_done.dart';
 import 'features/user/user_edit.dart';
 import 'features/user/user_view.dart';
 
-void main()=>runApp(
-    MyApp());
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(
+      const ProviderScope(child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -45,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/login':(context)=>LoginScreen(),
         '/signup':(context)=>SignUpScreen(),
         '/otp':(context)=>OTPscreen(),
+        '/otpsignin':(context)=>OTPscreenSignIn(),
         '/getuserinfo':(context)=>UserInfoSelectScreen(),
         '/home':(context)=>HomeScreen(),
         '/mesenger':(context)=>Messenger(),
@@ -57,7 +66,8 @@ class MyApp extends StatelessWidget {
         '/reportscreen':(context)=>ReportScreen(),
         '/verify':(context)=>Verify(),
         '/verifystepper':(context)=>VerifyStepper(),
-        '/selectdocument':(context)=>DocumentSelect()
+        '/selectdocument':(context)=>DocumentSelect(),
+        '/verifydone':(context)=>VerifyDone()
       },
     );
   }
