@@ -1,4 +1,10 @@
+
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../colors.dart';
 import '../../../global_styles.dart';
@@ -11,8 +17,23 @@ class VerifyStepper extends StatefulWidget {
 }
 
 class _VerifyStepperState extends State<VerifyStepper> {
+
+  File? image;
+
   int _index = 0;
   bool isLastStep=false;
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() => this.image = imageTemporary);
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +93,13 @@ class _VerifyStepperState extends State<VerifyStepper> {
                   children: [
                     Text('Upload your ID',style: headingbold,),
                     Text('Front side',style: subtitleblue,),
-                    Image.asset('assets/images/id_card.png',height: 120),
+                    image != null? Image.file(image!,width:160,height:160,fit:BoxFit.cover,) : Image.asset('assets/images/id_card.png',height: 120),
                     Text('Upload a front side image of your Document',style: subtitleblue,),
                     SizedBox(height: 40),
                     ElevatedButton.icon(
                       label: Text('Upload'),
                       icon: Icon(Icons.upload_rounded),
-                      onPressed: (){},
+                      onPressed: () => pickImage(ImageSource.gallery),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange,
                             minimumSize: Size(180, 40),
@@ -102,13 +123,13 @@ class _VerifyStepperState extends State<VerifyStepper> {
                   children: [
                     Text('Upload your ID',style: headingbold,),
                     Text('Back side',style: subtitleblue,),
-                    Image.asset('assets/images/id_card.png',height: 120),
+                    image != null? Image.file(image!,width:160,height:160,fit:BoxFit.cover,) : Image.asset('assets/images/id_card.png',height: 120),
                     Text('Upload a back side image of your Document',style: subtitleblue,),
                     SizedBox(height: 40),
                     ElevatedButton.icon(
                       label: Text('Upload'),
                       icon: Icon(Icons.upload_rounded),
-                      onPressed: (){},
+                      onPressed: ()=> pickImage(ImageSource.gallery),
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           minimumSize: Size(180, 40),
@@ -130,14 +151,14 @@ class _VerifyStepperState extends State<VerifyStepper> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('Upload your photo',style: headingbold,),
-                    Text('Selfi',style: subtitleblue,),
-                    Image.asset('assets/images/id_card.png',height: 120),
-                    Text('Capture a selfi photo of yourself',style: subtitleblue,),
+                    Text('Selfie',style: subtitleblue,),
+                    image != null? Image.file(image!,width:140,height:140,fit:BoxFit.cover,) : Image.asset('assets/images/id_card.png',height: 120),
+                    Text('Capture a selfie photo of yourself',style: subtitleblue,),
                     SizedBox(height: 40),
                     ElevatedButton.icon(
                       label: Text('Capture'),
                       icon: Icon(Icons.photo),
-                      onPressed: (){},
+                      onPressed: ()=> pickImage(ImageSource.camera),
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           minimumSize: Size(180, 40),
