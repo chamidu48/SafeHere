@@ -21,8 +21,10 @@ import 'package:safehere/screens/report_screen.dart';
 import 'package:safehere/screens/settings.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'features/auth/screens/otpverify_signin.dart';
 import 'features/auth/screens/signup_screen.dart';
 import 'features/auth/screens/verify.dart';
+import 'features/auth/screens/verify_done.dart';
 import 'features/user/user_edit.dart';
 import 'features/user/user_view.dart';
 
@@ -51,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/login':(context)=>LoginScreen(),
         '/signup':(context)=>SignUpScreen(),
         '/otp':(context)=>OTPscreen(),
+        '/otpsignin':(context)=>OTPscreenSignIn(),
         '/getuserinfo':(context)=>UserInfoSelectScreen(),
         '/home':(context)=>HomeScreen(),
         '/mesenger':(context)=>Messenger(),
@@ -63,7 +66,8 @@ class MyApp extends StatelessWidget {
         '/reportscreen':(context)=>ReportScreen(),
         '/verify':(context)=>Verify(),
         '/verifystepper':(context)=>VerifyStepper(),
-        '/selectdocument':(context)=>DocumentSelect()
+        '/selectdocument':(context)=>DocumentSelect(),
+        '/verifydone':(context)=>VerifyDone()
       },
     );
   }

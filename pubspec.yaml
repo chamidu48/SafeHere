@@ -75,6 +75,7 @@ flutter:
     - assets/svg/face_id.svg
     - assets/svg/verify.svg
     - assets/images/profilepic.jpg
+    - assets/images/id_card.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
