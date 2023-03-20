@@ -164,7 +164,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             ],
                           ),
                           SizedBox(height: 40,),
-                          filledButton(sendPhoneNumber, 'Continue', Colors.white, primaryColor)
+                          filledButton(//--set this to 'sendPhoneNumber'
+                              (){
+                                Navigator.pushNamed(context, '/verify');
+                              }, 'Continue', Colors.white, primaryColor)
                         ],
                       ),
                     )

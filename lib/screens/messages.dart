@@ -75,7 +75,9 @@ class _MessengerState extends State<Messenger> {
       child: Icon(Icons.edit),
       elevation: 0,
       splashColor: chatcardSelectedColor,
-      onPressed: (){},
+      onPressed: (){
+        Navigator.pushNamed(context, '/selectcontacts');
+      },
     );
   }
 }

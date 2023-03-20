@@ -32,7 +32,7 @@ class _VerifyDoneState extends State<VerifyDone> {
                 textAlign: TextAlign.center,style: bodytextblue,),
               SizedBox(height: 40,),
               filledButton((){
-                Navigator.pushNamedAndRemoveUntil(context,'/home',(route)=>false);
+                Navigator.pushNamedAndRemoveUntil(context,'/getuserinfo',(route)=>false);
               }, 'Explore', primaryColor, Colors.white)
             ],
           ),

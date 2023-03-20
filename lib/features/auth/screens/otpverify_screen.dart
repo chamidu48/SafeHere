@@ -28,7 +28,6 @@ import '../controller/auth_controller.dart';
        context,
        verificationId,
        userOTP,
-       false
      );
    }
 

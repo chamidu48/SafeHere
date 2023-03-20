@@ -1,22 +1,22 @@
-import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:safehere/common/utils/utils.dart';
 import 'package:safehere/global_styles.dart';
-import 'package:safehere/widgets/buttons.dart';
-import 'package:safehere/widgets/custom_button.dart';
-
 import '../../../colors.dart';
+import '../controller/auth_controller.dart';
 
-class UserInfoSelectScreen extends StatefulWidget {
+class UserInfoSelectScreen extends ConsumerStatefulWidget {
   const UserInfoSelectScreen({Key? key}) : super(key: key);
 
   @override
-  _UserInfoSelectScreenState createState() => _UserInfoSelectScreenState();
+  ConsumerState<UserInfoSelectScreen> createState() => _UserInfoSelectScreenState();
 }
 
-class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
+class _UserInfoSelectScreenState extends ConsumerState<UserInfoSelectScreen> {
 
   final _nameFieldController=TextEditingController();
   final _bioFieldController=TextEditingController();
@@ -27,6 +27,28 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
     super.dispose();
     _nameFieldController.dispose();
     _bioFieldController.dispose();
+  }
+
+  File? image;
+
+  void selectImage() async{
+    image = await pickImage(context);
+    setState(() {});
+    print(image?.path);
+  }
+
+  void storeUserData() async {
+    String name = _nameFieldController.text.trim();
+    String bio = _bioFieldController.text.trim();
+
+    if (name.isNotEmpty) {
+      ref.read(authControllerProvider).saveUserDataToFirebase(
+        context,
+        name,
+        image,
+        bio
+      );
+    }
   }
 
   @override
@@ -44,8 +66,8 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
         automaticallyImplyLeading: false,
         actions: [
           TextButton(onPressed: (){
-            Navigator.of(context).popAndPushNamed('/home');
-          }, child: Text('Skip',style: textbuttonlight,))
+            storeUserData();
+          }, child: Text('Save',style: textbuttonlight,))
         ],
       ),
       body: SafeArea(
@@ -66,18 +88,28 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Material(
-                        child: CircleAvatar(
-                          foregroundColor: Colors.white,
-                          backgroundColor: myColorScheme[400],
-                          child: Text('Chnage Photo'),
-                          radius: 70,
-                        ),
-                        shape: CircleBorder(
-                          side: BorderSide(color: Colors.white,width: 4)
-                        ),
-                        color: Colors.white,
-                        clipBehavior: Clip.hardEdge,
+                      Stack(
+                        children: [
+                          Material(
+                            child: image==null?
+                                    CircleAvatar(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: myColorScheme[400],
+                                    radius: 70,
+                                    )
+                            : CircleAvatar(
+                                backgroundImage: FileImage(image!),radius: 70,),
+                                shape: CircleBorder(
+                                side: BorderSide(color: primaryColor,width: 4)
+                            ),
+                            color: Colors.white,
+                            clipBehavior: Clip.hardEdge,
+                          ),
+                          Positioned(
+                            bottom: -3,
+                              right: 0,
+                              child: IconButton(onPressed: (){selectImage();}, icon: Icon(Icons.add_a_photo,color: Colors.white,)))
+                        ],
                       ),
                     ],
                   ),
@@ -114,7 +146,7 @@ class _UserInfoSelectScreenState extends State<UserInfoSelectScreen> {
       enabledBorder: InputBorder.none,
       focusedBorder: InputBorder.none,
       errorBorder: InputBorder.none,
-      hintText: 'Choose a username',
+      hintText: 'Enter name',
       hintStyle: textfieldfilled,
       suffixIcon: InkWell(
           onTap: (){},
