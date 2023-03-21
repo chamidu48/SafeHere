@@ -44,7 +44,7 @@ class SelectContactRepository {
         );
         if (selectedPhoneNum == userData.phoneNumber) {
           isFound = true;
-          Navigator.pushNamed(
+          Navigator.popAndPushNamed(
             context,
             '/chatscreen',
             arguments: {

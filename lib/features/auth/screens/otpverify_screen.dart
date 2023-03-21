@@ -11,9 +11,7 @@ import '../controller/auth_controller.dart';
 
 
  class OTPscreen extends ConsumerWidget {
-
    String verificationId='';
-
    OTPscreen({Key? key}) : super(key: key);
 
    final _pinCodeController=TextEditingController();
@@ -34,9 +32,7 @@ import '../controller/auth_controller.dart';
 
    @override
    Widget build(BuildContext context,WidgetRef ref) {
-
      verificationId=ModalRoute.of(context)!.settings.arguments as String;
-
      return Scaffold(
        body: Stack(
          children: [
