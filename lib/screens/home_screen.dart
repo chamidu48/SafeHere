@@ -5,7 +5,7 @@ import 'package:safehere/global_styles.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
-import 'package:safehere/screens/messages.dart';
+import 'package:safehere/features/chat/widgets/messages.dart';
 import 'package:safehere/screens/settings.dart';
 
 class HomeScreen extends StatefulWidget {

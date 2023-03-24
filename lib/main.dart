@@ -19,7 +19,7 @@ import 'package:safehere/firebase_options.dart';
 import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
 import 'package:safehere/screens/home_screen.dart';
-import 'package:safehere/screens/messages.dart';
+import 'package:safehere/features/chat/widgets/messages.dart';
 import 'package:safehere/screens/report_screen.dart';
 import 'package:safehere/screens/settings.dart';
 import 'package:flutter_svg/flutter_svg.dart';

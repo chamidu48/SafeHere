@@ -7,10 +7,9 @@ import 'package:safehere/global_styles.dart';
 import 'package:safehere/widgets/loader.dart';
 
 import '../../../colors.dart';
-import '../../../info.dart';
 
 class SelectContacts extends ConsumerWidget {
-  const SelectContacts({Key? key}) : super(key: key);
+  SelectContacts({Key? key}) : super(key: key);
 
   void selectContact(
       WidgetRef ref, Contact selectedContact, BuildContext context) {
@@ -37,7 +36,7 @@ class SelectContacts extends ConsumerWidget {
             return ListView.builder(
               itemCount: contactList.length,
               itemBuilder: (context,index){
-                print(index);
+                print(contactList[index]);
                 final contact=contactList[index];
                 return ListTile(
                   contentPadding: EdgeInsets.symmetric(vertical: 5,horizontal: 15),

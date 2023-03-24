@@ -36,7 +36,7 @@ class AuthRepository{
     return user;
   }
 
-  void signUpWithPhone(BuildContext context,String phoneNumber)async{
+  void loginWithPhone(BuildContext context,String phoneNumber)async{
     try{
       await auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
@@ -60,7 +60,31 @@ class AuthRepository{
     }
   }
 
-  void verifyOTP({
+  void signUpWithPhone(BuildContext context,String phoneNumber)async{
+    try{
+      await auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await auth.signInWithCredential(credential);
+        },
+        verificationFailed: (e) {
+          throw Exception(e.message);
+        },
+        codeSent: ((String verificationId, int? resendToken) async {
+          Navigator.pushNamed(
+            context,
+            '/otpsignin',
+            arguments: verificationId,
+          );
+        }),
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    }catch(e){
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
+
+  void verifyOTPlogin({
     required BuildContext context,
     required String verificationId,
     required userOTP,
@@ -82,6 +106,39 @@ class AuthRepository{
           '/home', (route) => false,
         );
       }
+    }
+    catch(e){
+      showSnackBar(context: context, content: e.toString() );
+    }
+  }
+
+  void verifyOTPsignin({
+    required BuildContext context,
+    required String verificationId,
+    required userOTP,
+    // required bool isSignIn,
+  })async {
+    try{
+      PhoneAuthCredential credential=PhoneAuthProvider.credential(verificationId: verificationId, smsCode: userOTP);
+      UserCredential userCredential=await auth.signInWithCredential(credential);
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/verify', (route) => false,
+      );
+
+      // if(userCredential.additionalUserInfo?.isNewUser==true){
+      //   showSnackBar(context: context, content: "Account not found!");
+      //   Navigator.pushNamedAndRemoveUntil(
+      //     context,
+      //     '/signup', (route) => false,
+      //   );
+      // }else{
+      //   Navigator.pushNamedAndRemoveUntil(
+      //     context,
+      //     '/home', (route) => false,
+      //   );
+      // }
     }
     catch(e){
       showSnackBar(context: context, content: e.toString() );
@@ -128,5 +185,11 @@ class AuthRepository{
     }catch(e){
       showSnackBar(context: context, content: e.toString());
     }
+  }
+
+  Stream<UserModel> userData(String userId){
+    return firestore.collection("users").doc(userId).snapshots().map(
+            (event) => UserModel.fromMap(event.data()!)
+    );
   }
 }

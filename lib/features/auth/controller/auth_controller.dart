@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -28,17 +29,29 @@ class AuthController{
     return user;
   }
 
+  void logInWithPhone(BuildContext context,String phoneNumber){
+    authRepository.loginWithPhone(context, phoneNumber);
+  }
+
   void signInWithPhone(BuildContext context,String phoneNumber){
     authRepository.signUpWithPhone(context, phoneNumber);
   }
 
-  void verifyOTP(BuildContext context, String verificationId, String userOTP) {
-    authRepository.verifyOTP(
-      context: context,
-      verificationId: verificationId,
-      userOTP: userOTP,
-      // isSignIn:isSignIn,
-    );
+  void verifyOTP(BuildContext context, String verificationId, String userOTP,bool isLogIn) {
+    if(isLogIn){
+      authRepository.verifyOTPlogin(
+        context: context,
+        verificationId: verificationId,
+        userOTP: userOTP
+      );
+    }
+    else{
+      authRepository.verifyOTPsignin(
+        context: context,
+        verificationId: verificationId,
+        userOTP: userOTP,
+      );
+    }
   }
   void saveUserDataToFirebase(
       BuildContext context, String name, File? profilePic,String bio) {
@@ -49,6 +62,9 @@ class AuthController{
       ref: ref,
       context: context,
     );
+  }
+  Stream<UserModel> userDataById(String userId){
+    return authRepository.userData(userId);
   }
 
 }

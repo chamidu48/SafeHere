@@ -25,6 +25,9 @@ class SelectContactRepository {
       if (await FlutterContacts.requestPermission()) {
         contacts = await FlutterContacts.getContacts(withProperties: true);
       }
+      else{
+        print("Access denied");
+      }
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -1,61 +1,75 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:safehere/colors.dart';
+import 'package:safehere/features/auth/controller/auth_controller.dart';
 import 'package:safehere/features/chat/widgets/chat_list.dart';
 import 'package:safehere/global_styles.dart';
+import 'package:safehere/models/user_model.dart';
 import 'package:safehere/widgets/buttons.dart';
+import 'package:safehere/widgets/loader.dart';
 
 import '../../../info.dart';
+import '../widgets/bottom_chat_field.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends ConsumerWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class _ChatScreenState extends State<ChatScreen> {
-  @override
-  Widget build(BuildContext context) {
+    final userinfo=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
+    final username=userinfo['name'];
+    final uid=userinfo['uid'];
+
     return Scaffold(
       backgroundColor: bodyColor1,
       appBar: AppBar(
         backgroundColor: appbarColor1,
-        title: Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: chatcardSelectedColor,
-              backgroundImage: NetworkImage(
-                info[0]['profilePic'].toString(),
-              ),
-              radius: 18,
-            ),
-            SizedBox(width: 15,),
-            Expanded(
-              child: InkWell(
-                onTap: (){
-                  Navigator.pushNamed(context, '/userview');
-                },
-                focusColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+        title: InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, '/userview');
+            },
+            focusColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            child: StreamBuilder<UserModel>(
+              stream: ref.read(authControllerProvider).userDataById(uid),
+              builder: (context,snapshot){
+                if(snapshot.connectionState==ConnectionState.done){
+                  return const Loader();
+                }
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      info[0]['name'].toString(),
-                      style: appbartitle,
-                      maxLines: 1,
-                      overflow: TextOverflow.fade,
+                    CircleAvatar(
+                      backgroundColor: primaryColor,
+                      radius: 18,
                     ),
-                    Text('Online',style: appbarStatus,)
-                  ],
-                ),
-              ),
-            ),
-          ],
+                  SizedBox(width: 10),
+                  Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(username,style: appbartitle,),
+                    Text(snapshot.data!.isOnline?'online':'offline',style: appbarStatus,)
+                  ],)],
+                );
+              },
+            )
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       username,
+          //       style: appbartitle,
+          //       maxLines: 1,
+          //       overflow: TextOverflow.fade,
+          //     ),
+          //     Text('Online',style: appbarStatus,)
+          //   ],
+          // ),
         ),
         centerTitle: false,
         actions: [
@@ -65,58 +79,12 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          Expanded(child: ChatList()),
-          Container(
-            height: 80,
-            padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: TextField(
-                    style: textfieldfilled,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: appbarColor1,
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Icon(Icons.emoji_emotions, color: Colors.grey,),
-                      ),
-                      hintText: 'Type a message!',
-                      hintStyle: textfieldfilled,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
-                      ),
-                      contentPadding: const EdgeInsets.all(20),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 5,),
-                Expanded(
-                  flex: 1,
-                  child: ElevatedButton(
-                    onPressed: (){},
-                    child: Icon(Icons.send),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      primary: Colors.white,
-                      minimumSize: Size(50,60),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)
-                      )
-                    ),
-                  )
-                )
-              ],
-            ),
-          ),
+          Expanded(child: ChatList(recieverUserId: uid,)),
+          BottomChatField(recieverUserId: uid),
         ],
       ),
     );
   }
 }
+
 

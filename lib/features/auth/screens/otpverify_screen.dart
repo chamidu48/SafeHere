@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,11 +24,7 @@ import '../controller/auth_controller.dart';
   }
 
    void verifyOTP(WidgetRef ref, BuildContext context, String userOTP,) {
-     ref.read(authControllerProvider).verifyOTP(
-       context,
-       verificationId,
-       userOTP,
-     );
+     ref.read(authControllerProvider).verifyOTP(context, verificationId, userOTP, true);
    }
 
 
