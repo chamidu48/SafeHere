@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:safehere/colors.dart';
 import 'package:safehere/global_styles.dart';
 import 'package:safehere/info.dart';
@@ -11,6 +15,20 @@ class ReportScreen extends StatefulWidget {
 }
 
 class _ReportScreenState extends State<ReportScreen> {
+  File? image;
+
+  Future pickImage() async{
+   try{
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+    setState(() => this.image = imageTemporary);
+  } on PlatformException catch (e) {
+    print('Failed to get image: $e');
+  }
+  }
+
   String dropdownValue = 'Select Reason';
 
   Widget build(BuildContext context){
@@ -105,7 +123,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   height: 10,
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     print('upload');
                   },
                   child: Container(
@@ -113,28 +131,26 @@ class _ReportScreenState extends State<ReportScreen> {
                     height: 50,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(5)
+                      borderRadius: BorderRadius.circular(5),
                     ),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            'Upload',
-                            style: buttonwhite
+                          Text('Upload', style: buttonwhite),
+                          SizedBox(width: 10),
+                          Icon(Icons.file_upload, size: 25),
+                          SizedBox(width: 10),
+                          TextButton(
+                            onPressed: () => pickImage(),
+                            child: Text('Click here', style: TextStyle(color: Colors.blue)),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.file_upload,
-                            size: 25,
-                          )
                         ],
                       ),
                     ),
                   ),
                 ),
+
                 SizedBox(
                   height: 20,
                 ),
