@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:safehere/colors.dart';
 import 'package:safehere/features/auth/controller/auth_controller.dart';
+import 'package:safehere/features/auth/repository/auth_repository.dart';
 import 'package:safehere/features/chat/widgets/chat_list.dart';
 import 'package:safehere/global_styles.dart';
 import 'package:safehere/models/user_model.dart';
@@ -17,18 +18,19 @@ class ChatScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final userinfo=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
     final username=userinfo['name'];
     final uid=userinfo['uid'];
-
     return Scaffold(
       backgroundColor: bodyColor1,
       appBar: AppBar(
         backgroundColor: appbarColor1,
         title: InkWell(
             onTap: (){
-              Navigator.pushNamed(context, '/userview');
+              Navigator.pushNamed(context, '/userview',arguments: {
+                'name': username,
+                'uid': uid,
+              },);
             },
             focusColor: Colors.transparent,
             splashColor: Colors.transparent,
@@ -45,6 +47,7 @@ class ChatScreen extends ConsumerWidget {
                   children: [
                     CircleAvatar(
                       backgroundColor: primaryColor,
+                      backgroundImage: NetworkImage(snapshot.data!.profilePic),
                       radius: 18,
                     ),
                   SizedBox(width: 10),
@@ -57,19 +60,6 @@ class ChatScreen extends ConsumerWidget {
                 );
               },
             )
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Text(
-          //       username,
-          //       style: appbartitle,
-          //       maxLines: 1,
-          //       overflow: TextOverflow.fade,
-          //     ),
-          //     Text('Online',style: appbarStatus,)
-          //   ],
-          // ),
         ),
         centerTitle: false,
         actions: [
