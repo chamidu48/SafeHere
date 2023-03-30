@@ -45,5 +45,7 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSContactsUsageDescription</key>
+    <string>Select a contact to chat</string>
 </dict>
 </plist>

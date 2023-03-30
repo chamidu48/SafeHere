@@ -164,7 +164,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             ],
                           ),
                           SizedBox(height: 40,),
-                          filledButton(sendPhoneNumber, 'Continue', Colors.white, primaryColor)
+                          filledButton(//--set this to 'sendPhoneNumber'
+                              // (){
+                              //   Navigator.pushNamed(context, '/verify')},
+                            sendPhoneNumber,'Continue', Colors.white, primaryColor)
                         ],
                       ),
                     )
@@ -181,6 +184,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     controller: _nameFieldController,
     keyboardType: TextInputType.text,
     textInputAction: TextInputAction.done,
+    style: textfield,
     decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -206,6 +210,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     controller: _emailFieldController,
     keyboardType: TextInputType.emailAddress,
     textInputAction: TextInputAction.done,
+    style: textfield,
     decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),

@@ -1,22 +1,50 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:safehere/colors.dart';
+import 'package:safehere/features/auth/controller/auth_controller.dart';
 import 'package:safehere/global_styles.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
-import 'package:safehere/screens/messages.dart';
+import 'package:safehere/features/chat/widgets/messages.dart';
 import 'package:safehere/screens/settings.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObserver {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch(state){
+      case AppLifecycleState.resumed:
+        ref.read(authControllerProvider).setUserState(true);
+        break;
+      case AppLifecycleState.paused:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+        ref.read(authControllerProvider).setUserState(false);
+        break;
+    }
+  }
 
   int currentIndex=0;
   final bodyScrenns=[Messenger(),Groups(),Calls(),Settings()];

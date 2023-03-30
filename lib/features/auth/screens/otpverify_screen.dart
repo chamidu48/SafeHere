@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,9 +13,7 @@ import '../controller/auth_controller.dart';
 
 
  class OTPscreen extends ConsumerWidget {
-
    String verificationId='';
-
    OTPscreen({Key? key}) : super(key: key);
 
    final _pinCodeController=TextEditingController();
@@ -24,20 +24,13 @@ import '../controller/auth_controller.dart';
   }
 
    void verifyOTP(WidgetRef ref, BuildContext context, String userOTP,) {
-     ref.read(authControllerProvider).verifyOTP(
-       context,
-       verificationId,
-       userOTP,
-       false
-     );
+     ref.read(authControllerProvider).verifyOTP(context, verificationId, userOTP, true);
    }
 
 
    @override
    Widget build(BuildContext context,WidgetRef ref) {
-
      verificationId=ModalRoute.of(context)!.settings.arguments as String;
-
      return Scaffold(
        body: Stack(
          children: [

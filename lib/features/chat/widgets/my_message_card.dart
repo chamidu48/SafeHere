@@ -41,24 +41,21 @@ class MyMessageCard extends StatelessWidget {
               ),
               Positioned(
                 bottom: 4,
-                right: 10,
-                child: Row(
-                  children: [
-                    Text(
-                      date,
-                      style:mymessagetext
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Icon(
-                      Icons.done_all,
-                      size: 20,
-                      color: primaryColor,
-                    ),
-                  ],
-                ),
+                right: 35,
+                child: Text(
+                    date,
+                    style:mymessagetext
+                )
               ),
+              Positioned(
+                bottom: 4,
+                right: 10,
+                child: Icon(
+                  Icons.done_all,
+                  size: 20,
+                  color: primaryColor,
+                ),
+              )
             ],
           ),
         ),

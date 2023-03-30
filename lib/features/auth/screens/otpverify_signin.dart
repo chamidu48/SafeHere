@@ -27,7 +27,7 @@ class OTPscreenSignIn extends ConsumerWidget {
       context,
       verificationId,
       userOTP,
-      true
+      false
     );
   }
 

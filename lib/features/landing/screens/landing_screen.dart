@@ -36,7 +36,7 @@ class LandingScreen extends StatelessWidget {
                     }, 'Login', Colors.white, primaryColor),
                     SizedBox(height: 20,),
                     outlinedButton((){
-                      Navigator.pushNamed(context, '/verify');
+                      Navigator.pushNamed(context, '/signup');
                     }, 'Sign in', Colors.white, Colors.white)
                   ],
                 ),
