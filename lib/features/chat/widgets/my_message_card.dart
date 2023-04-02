@@ -7,9 +7,10 @@ class MyMessageCard extends StatelessWidget {
 
   final String message;
   final String date;
+  final bool isSeen;
 
   const MyMessageCard(
-      {Key? key, required this.message, required this.date}
+      {Key? key, required this.message, required this.date, required this.isSeen}
       ) : super(key: key);
 
   @override
@@ -50,11 +51,15 @@ class MyMessageCard extends StatelessWidget {
               Positioned(
                 bottom: 4,
                 right: 10,
-                child: Icon(
+                child: isSeen?Icon(
                   Icons.done_all,
                   size: 20,
                   color: primaryColor,
-                ),
+                ):Icon(
+                  Icons.done,
+                  size: 20,
+                  color: Colors.grey,
+                )
               )
             ],
           ),

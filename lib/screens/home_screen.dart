@@ -23,6 +23,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
   @override
   void initState() {
     super.initState();
+    ref.read(authControllerProvider).setUserState(true);
     WidgetsBinding.instance.addObserver(this);
   }
   @override

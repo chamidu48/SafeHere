@@ -5,6 +5,7 @@ import 'package:safehere/colors.dart';
 import 'package:safehere/features/auth/controller/auth_controller.dart';
 import 'package:safehere/features/auth/repository/auth_repository.dart';
 import 'package:safehere/features/chat/widgets/chat_list.dart';
+import 'package:safehere/features/encyption/encrypt_service.dart';
 import 'package:safehere/global_styles.dart';
 import 'package:safehere/models/user_model.dart';
 import 'package:safehere/widgets/buttons.dart';
@@ -21,6 +22,8 @@ class ChatScreen extends ConsumerWidget {
     final userinfo=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
     final username=userinfo['name'];
     final uid=userinfo['uid'];
+    final EncryptionService encryptionService=EncryptionService();
+
     return Scaffold(
       backgroundColor: bodyColor1,
       appBar: AppBar(
@@ -69,8 +72,8 @@ class ChatScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          Expanded(child: ChatList(recieverUserId: uid,)),
-          BottomChatField(recieverUserId: uid),
+          Expanded(child: ChatList(recieverUserId: uid,encryptionService: encryptionService,)),
+          BottomChatField(recieverUserId: uid,encryptionService: encryptionService),
         ],
       ),
     );

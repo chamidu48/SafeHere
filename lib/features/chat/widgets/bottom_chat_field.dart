@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:safehere/features/chat/controller/chat_controller.dart';
+import 'package:safehere/features/encyption/encrypt_service.dart';
 
 import '../../../colors.dart';
 import '../../../global_styles.dart';
 
 class BottomChatField extends ConsumerStatefulWidget {
   final String recieverUserId;
-  BottomChatField({Key? key,required this.recieverUserId}) : super(key: key);
+  final EncryptionService encryptionService;
+
+  BottomChatField({Key? key,required this.recieverUserId,required this.encryptionService}) : super(key: key);
 
   @override
   ConsumerState<BottomChatField> createState() => _BottomChatFieldState();
@@ -15,11 +18,13 @@ class BottomChatField extends ConsumerStatefulWidget {
 
 class _BottomChatFieldState extends ConsumerState<BottomChatField> {
 
+  late String encryptedMessage;
   final _messageInputController=TextEditingController();
 
   void sendTextMessage()async{
+    encryptedMessage=widget.encryptionService.encrypt(_messageInputController.text.trim());
     ref.read(chatControllerProvider).sendTextMessage(
-        context, _messageInputController.text.trim(), widget.recieverUserId);
+        context, encryptedMessage, widget.recieverUserId);
     setState(() {
       _messageInputController.text="";
     });

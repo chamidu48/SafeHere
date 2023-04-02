@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:safehere/features/chat/controller/chat_controller.dart';
 import 'package:safehere/features/chat/widgets/sender_message_card.dart';
 import 'package:safehere/features/chat/widgets/messages.dart';
+import 'package:safehere/features/encyption/encrypt_service.dart';
 import 'package:safehere/models/message.dart';
 
 import '../../../info.dart';
@@ -14,9 +15,12 @@ import 'my_message_card.dart';
 
 class ChatList extends ConsumerStatefulWidget {
   final String recieverUserId;
+  final EncryptionService encryptionService;
+
   ChatList({
     Key? key,
-    required this.recieverUserId
+    required this.recieverUserId,
+    required this.encryptionService
   }) : super(key: key);
 
   @override
@@ -49,13 +53,18 @@ class _ChatListState extends ConsumerState<ChatList> {
             itemCount: snapshot.data?.length,
             itemBuilder: (context,index){
               final messageData=snapshot.data![index];
+              if(!messageData.isSeen && messageData.recieverid==FirebaseAuth.instance.currentUser!.uid){
+                ref.read(chatControllerProvider).setChatMessageSeen(context, widget.recieverUserId, messageData.messageId);
+              }
+
               return messageData.senderId==FirebaseAuth.instance.currentUser!.uid?
               MyMessageCard(
-                message: messageData.text,
+                message: widget.encryptionService.decrypt(messageData.text),
                 date: DateFormat.Hm().format(messageData.timeSent),
+                isSeen: messageData.isSeen,
               )
                   : SendermessageCard(
-                message: messageData.text,
+                message: widget.encryptionService.decrypt(messageData.text),
                 date: DateFormat.Hm().format(messageData.timeSent),
               );
             },
