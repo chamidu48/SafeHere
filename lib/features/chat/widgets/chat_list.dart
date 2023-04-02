@@ -53,10 +53,15 @@ class _ChatListState extends ConsumerState<ChatList> {
             itemCount: snapshot.data?.length,
             itemBuilder: (context,index){
               final messageData=snapshot.data![index];
+              if(!messageData.isSeen && messageData.recieverid==FirebaseAuth.instance.currentUser!.uid){
+                ref.read(chatControllerProvider).setChatMessageSeen(context, widget.recieverUserId, messageData.messageId);
+              }
+
               return messageData.senderId==FirebaseAuth.instance.currentUser!.uid?
               MyMessageCard(
                 message: widget.encryptionService.decrypt(messageData.text),
                 date: DateFormat.Hm().format(messageData.timeSent),
+                isSeen: messageData.isSeen,
               )
                   : SendermessageCard(
                 message: widget.encryptionService.decrypt(messageData.text),

@@ -56,7 +56,7 @@ class AuthRepository{
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     }catch(e){
-      showSnackBar(context: context, content: e.toString());
+      showSnackBarRed(context: context, content: e.toString());
     }
   }
 
@@ -80,7 +80,7 @@ class AuthRepository{
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     }catch(e){
-      showSnackBar(context: context, content: e.toString());
+      showSnackBarRed(context: context, content: e.toString());
     }
   }
 
@@ -108,7 +108,7 @@ class AuthRepository{
       }
     }
     catch(e){
-      showSnackBar(context: context, content: e.toString() );
+      showSnackBarRed(context: context, content: e.toString() );
     }
   }
 
@@ -141,7 +141,7 @@ class AuthRepository{
       // }
     }
     catch(e){
-      showSnackBar(context: context, content: e.toString() );
+      showSnackBarRed(context: context, content: e.toString() );
     }
   }
 
@@ -176,6 +176,7 @@ class AuthRepository{
 
       await firestore.collection('users').doc(uid).set(user.toMap());
 
+      showSnackBarGreen(context: context, content: "Account created successfully");
       Navigator.pushNamedAndRemoveUntil(
         context,
             '/home',

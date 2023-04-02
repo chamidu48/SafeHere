@@ -204,7 +204,7 @@ class ChatRepository{
         senderUsername: senderUser.name,
       );
     } catch (e) {
-      showSnackBar(context: context, content: e.toString());
+      showSnackBarRed(context: context, content: e.toString());
     }
   }
 
@@ -229,7 +229,7 @@ class ChatRepository{
           .update({"isSeen":true});
     }
     catch(e){
-      showSnackBar(context: context, content: e.toString());
+      showSnackBarRed(context: context, content: e.toString());
     }
   }
 }

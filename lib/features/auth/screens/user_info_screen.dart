@@ -48,6 +48,8 @@ class _UserInfoSelectScreenState extends ConsumerState<UserInfoSelectScreen> {
         image,
         bio
       );
+    }else{
+      showSnackBarRed(context: context, content: "Please select a username");
     }
   }
 

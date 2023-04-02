@@ -59,7 +59,7 @@ class SelectContactRepository {
       }
 
       if (!isFound) {
-        showSnackBar(
+        showSnackBarRed(
           context: context,
           content: 'This number does not exist on this app.',
         );
