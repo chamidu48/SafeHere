@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:safehere/colors.dart';
 import 'package:safehere/global_styles.dart';
 import 'package:safehere/info.dart';
 import 'package:safehere/widgets/buttons.dart';
+
+import '../common/utils/utils.dart';
 class ReportScreen extends StatefulWidget {
   const ReportScreen({Key? key}) : super(key: key);
 
@@ -12,8 +18,28 @@ class ReportScreen extends StatefulWidget {
 
 class _ReportScreenState extends State<ReportScreen> {
   String dropdownValue = 'Select Reason';
+  late File proofimg;
+  bool imageSelected=false;
+
+  Future pickIdFront(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() {
+        imageSelected=true;
+        proofimg = imageTemporary;});
+      showSnackBarGreen(context: context, content: "Image loaded successfully!");
+    } on PlatformException catch (e) {
+      showSnackBarRed(context: context, content: e.toString());
+    }
+  }
 
   Widget build(BuildContext context){
+    final userinfo=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
+    final username=userinfo['name'];
+    final uid=userinfo['uid'];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appbarColor1,
@@ -106,7 +132,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
                 InkWell(
                   onTap: (){
-                    print('upload');
+                    pickIdFront(ImageSource.gallery);
                   },
                   child: Container(
                     width: double.infinity,
@@ -167,7 +193,17 @@ class _ReportScreenState extends State<ReportScreen> {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: (){print('reported');},
+                  onTap: (){
+                    if(imageSelected==false){
+                      showSnackBarRed(context: context, content: 'Please upload an proof image');
+                    }else{
+                      Navigator.pushNamed(context, '/reportresult',arguments: {
+                        'name':username,
+                        'uid':uid,
+                        'img':proofimg
+                      });
+                    }
+                  },
                   child: Container(
                     width: double.infinity,
                     height: 50,
