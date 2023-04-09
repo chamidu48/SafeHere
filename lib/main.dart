@@ -20,6 +20,7 @@ import 'package:safehere/screens/calls.dart';
 import 'package:safehere/screens/groups.dart';
 import 'package:safehere/screens/home_screen.dart';
 import 'package:safehere/features/chat/widgets/messages.dart';
+import 'package:safehere/screens/report_results.dart';
 import 'package:safehere/screens/report_screen.dart';
 import 'package:safehere/screens/settings.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -126,7 +127,8 @@ class MyApp extends ConsumerWidget {
         '/selectdocument':(context)=>DocumentSelect(),
         '/verifydone':(context)=>VerifyDone(),
         '/loader':(context)=>Loader(),
-        '/selectcontacts':(context)=>SelectContacts()
+        '/selectcontacts':(context)=>SelectContacts(),
+        '/reportresult':(context)=>Results()
       },
       home: ref.watch(userDataAuthProvider).when(
         data: (user) {

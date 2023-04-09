@@ -218,7 +218,10 @@ class _UserViewState extends ConsumerState<UserView> {
                             ElevatedButton.icon(
                               icon:Icon(Icons.report_gmailerrorred_outlined),
                               onPressed: (){
-                                Navigator.pushNamed(context, '/reportscreen');
+                                Navigator.pushNamed(context, '/reportscreen',arguments: {
+                                  'name': username,
+                                  'uid': uid,
+                                });
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red,
